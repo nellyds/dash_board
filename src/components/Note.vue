@@ -2,7 +2,7 @@
   <v-container>
     {{content}}
     {{client}}
-    {[date]}
+    {{date}}
   </v-container>
 </template>
 

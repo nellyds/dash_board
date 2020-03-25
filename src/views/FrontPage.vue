@@ -1,5 +1,9 @@
 <template>
-  <div class="home">
+  <div class="FrontPage">
+      <v-content>
+            
+
+      </v-content>
   </div>
 </template>
 
@@ -7,8 +11,9 @@
 // @ is an alias to /src
 
 export default {
-  name: "Home",
+  name: "FrontPage",
   components: {
+
   }
 };
 </script>

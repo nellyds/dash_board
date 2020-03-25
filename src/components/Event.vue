@@ -1,20 +1,16 @@
 <template>
   <v-container>
     {{content}}
-    {{client}}
-    {[date]}
+{{date}}}}
   </v-container>
 </template>
 
 <script>
 export default {
-  name: "Note",
+  name: "Event",
   props: {
     content: {
       type: String
-    },
-    client: {
-      type: String,
     },
     date: {
       type: String

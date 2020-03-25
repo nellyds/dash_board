@@ -1,23 +1,30 @@
 <template>
   <v-container>
-    {{content}}
-    {{client}}
-    {[date]}
+    {{name}}
+    {{email}}
+
+{{phone}}
+{{company}}
+
+
   </v-container>
 </template>
 
 <script>
 export default {
-  name: "Note",
+  name: "Client",
   props: {
-    content: {
+    name: {
       type: String
     },
-    client: {
+    email: {
       type: String,
     },
-    date: {
+    phone: {
       type: String
+    },
+    company:{
+        type: String,
     }
   }
 };

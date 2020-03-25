@@ -2,13 +2,13 @@
   <v-container>
     {{content}}
     {{client}}
-    {[date]}
+    {{date}}
   </v-container>
 </template>
 
 <script>
 export default {
-  name: "Note",
+  name: "Meeting",
   props: {
     content: {
       type: String
