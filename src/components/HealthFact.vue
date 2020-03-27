@@ -7,9 +7,7 @@
 <div v-if="toEdit" data-aos="fade-down"  data-aos-duration="1000">
 <v-form  action="#" @submit.prevent="editArticle">
 <v-text-field v-model="editedArticle" ></v-text-field>
-<v-btn color="primary" @click="deleteArticle">Delete Article</v-btn>
 <button type="submit" >Submit changes </button>
-
 </v-form>
 </div>
   </v-container>
@@ -42,20 +40,13 @@ export default {
     this.toEdit ? this.toEdit = false : this.toEdit = true
     },
     editArticle: function(){
+      window.alert('hi')
       this.$http
       .post    
       ('http://127.0.0.1:5000/editArticle',{
           "article": this.editedArticle,
           "_id": this.objectId
       })
-    },
-    deleteArticle: function(){
-      this.$http
-      .post('http://127.0.0.1:5000/deleteArticle',
-      {
-        "_id": this.objectId
-      }
-      )
     }
   }
 };

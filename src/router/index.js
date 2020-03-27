@@ -2,7 +2,6 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Protected from "../views/Protected.vue";
-
 import { authGuard } from "../auth/authGuard";
 
 Vue.use(VueRouter);
@@ -19,6 +18,11 @@ const routes = [
     component: () =>
       import("../views/About.vue"),
       beforeEnter: authGuard
+  },{
+  path: "/newsEdit",
+  name: "NewsEdit",
+  component: () =>
+    import("../views/NewsEdit.vue"),
   },
   {
     path: "/protected",

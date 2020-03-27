@@ -1,11 +1,14 @@
 <template>
 <div>
+  is this here
       <div v-if="!$auth.loading">
+
         <a  @click="login" class="button is-dark"><strong>Sign in</strong></a>
         <p v-if="!$auth.isAuthenticated"> not authenticated</p>
         <p v-else>authenticated </p>
         <a @click="logout" class="button is-dark"><strong>Log out</strong></a>
       </div>
+       <a @click="logout" class="button is-dark"><strong>Log out</strong></a>
 </div>
 </template>
 <script>
