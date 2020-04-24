@@ -8,6 +8,7 @@ import { Auth0Plugin} from "./auth";
 import axios from "axios";
 import "aos/dist/aos.css";
 import AOS from "aos";
+import Cloudinary from 'cloudinary-vue';
 Vue.config.productionTip = false;
 
 Vue.prototype.$http = axios;
@@ -22,7 +23,11 @@ Vue.use(Auth0Plugin, {
     );
   }
 });
-
+Vue.use(Cloudinary, {
+  configuration: {
+    cloudName: "demo"
+  }
+});
 new Vue({
   created(){
     AOS.init();

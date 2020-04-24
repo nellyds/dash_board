@@ -23,6 +23,7 @@ const routes = [
   name: "NewsEdit",
   component: () =>
     import("../views/NewsEdit.vue"),
+    beforeEnter: authGuard
   },
   {
     path: "/protected",
