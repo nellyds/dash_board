@@ -3,8 +3,6 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import vuetify from "./plugins/vuetify";
-import {domain, clientId} from "./auth/auth_config.json";
-import { Auth0Plugin} from "./auth";
 import axios from "axios";
 import "aos/dist/aos.css";
 import AOS from "aos";
@@ -12,17 +10,7 @@ import Cloudinary from 'cloudinary-vue';
 Vue.config.productionTip = false;
 
 Vue.prototype.$http = axios;
-Vue.use(Auth0Plugin, {
-  domain,
-  clientId,
-  onRedirectCallback: appState => {
-    router.push(
-      appState && appState.targetUrl
-        ? appState.targetUrl
-        : window.location.pathname
-    );
-  }
-});
+
 Vue.use(Cloudinary, {
   configuration: {
     cloudName: "demo"

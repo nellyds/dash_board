@@ -1,11 +1,9 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
-import Protected from "../views/Protected.vue";
-import { authGuard } from "../auth/authGuard";
+import BlogEdit from "../views/BlogEdit.vue";
 
 Vue.use(VueRouter);
-
 const routes = [
   {
     path: "/",
@@ -17,21 +15,29 @@ const routes = [
     name: "About",
     component: () =>
       import("../views/About.vue"),
-      beforeEnter: authGuard
   },{
   path: "/newsEdit",
   name: "NewsEdit",
   component: () =>
     import("../views/NewsEdit.vue"),
-    beforeEnter: authGuard
   },
   {
-    path: "/protected",
-    name: "Protected",
-    component: Protected,
-    beforeEnter: authGuard
+    path:"/blogEdit",
+    name:"BlogEdit", 
+    component: BlogEdit,
+beforeEnter:( to, from, next) =>{
+  window.alert(localStorage.getItem('isAuth'))
+  localStorage.getItem('isAuth') === 'true' ?  next() : window.alert('not authenticated')
+}
   }
 ];
+
+// function routeGuard(next)
+// {
+//   window.alert(localStorage.getItem('isAuth'))
+//  localStorage.getItem('isAuth') === 'true' ? next() : next({name: "Home"})
+
+// }
 
 const router = new VueRouter({
   mode: "history",
