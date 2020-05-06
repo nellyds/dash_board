@@ -59,14 +59,12 @@ export default {
     },
     getUser: function(){
           if ((this.user) == "admin@wellnessone.com"){
-              window.alert('hi');
               this.collections = this.$store.state.WellNessOne
           }
       }
   },
   beforeMount(){
       if (this.$auth.user.name == "admin@wellnessone.com"){
-              window.alert('hi');
               this.collections = this.$store.state.WellNessOne
           }
   }

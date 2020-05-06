@@ -1,15 +1,15 @@
 <template>
 <div data-aos="fade-left" data-aos-duration="600">
   <v-container >
-    {{content}}
-{{date}}
+<p>Title: {{title}} </p>
+<p>Content: {{content}}</p>
+
 <v-btn color="primary" @click="toggleEdit">Edit Article</v-btn>
 <div v-if="toEdit" data-aos="fade-down"  data-aos-duration="1000">
 <v-form  action="#" @submit.prevent="editArticle">
-<v-text-field v-model="editedArticle" ></v-text-field>
+<v-text-field label="content" v-model="editedArticle" />
 <v-btn color="primary" @click="deleteArticle">Delete Article</v-btn>
 <button type="submit" >Submit changes </button>
-
 </v-form>
 </div>
   </v-container>
@@ -23,6 +23,9 @@ export default {
     content: {
       type: String
     },
+    title:{
+      type: String
+    },
     date: {
       type: String
     },
@@ -34,7 +37,7 @@ export default {
     return{
       toEdit: false,
       editedArticle: '',
-      objectId: this.id
+      objectId: this.id,
     }
   },
   methods: {
@@ -46,6 +49,7 @@ export default {
       .post    
       ('http://127.0.0.1:5000/editArticle',{
           "article": this.editedArticle,
+          "title": this.editedTitle,
           "_id": this.objectId
       })
     },

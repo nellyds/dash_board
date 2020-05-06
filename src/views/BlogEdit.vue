@@ -1,10 +1,16 @@
 <template>
   <div class="BlogEdit">
-      sdfds why won't this show up?
-      <p>user: {{user}}</p>
-      <p>database: {{database}}</p>
-      <p>select: {{select}} </p>
-                <div v-if="collections.length >0">
+    <p>Database: {{database}}</p>
+    <p>User: {{user}}</p>
+    
+      <v-form action="#" @submit.prevent="postNews">
+        <v-text-field v-model="article" label="content" />
+        <v-text-field v-model="articleTitle" label="title" />
+        <v-btn text @click="showImageUpload = !showImageUpload" >Append Image</v-btn>
+        <ImageUpload v-if="showImageUpload"/>
+        <v-btn text @click="postNews" >Submit</v-btn>
+      </v-form>
+      <div v-if="collections.length >0">
                     <v-select
             :items="collections"
             label="Standard"
@@ -12,33 +18,39 @@
           ></v-select>
          <v-btn text @click="getCollection" >Get Collection </v-btn>
          <v-content>
-            <v-form action="#" @submit.prevent="postNews">
-                <v-text-field v-model="article" >type here</v-text-field>
-                <button type="submit">Submit new article</button>
-            </v-form>
-            <div  v-if="results.lenght > 0" >
-            <div   v-for="entry in results" :key="entry.date">
-                <Article v-bind:content = entry.article v-bind:date = entry.date v-bind:id= entry._id />
-            </div>
+            <v-btn text @click="getArticles" >get articles </v-btn>
+            <div v-if="articles.length > 0">
+             <div  v-for="entry in articles" :key="entry.date">
+                <Article v-bind:content = entry.article v-bind:title="title" v-bind:date = entry.date v-bind:id= entry._id />
+             </div>
             </div>
          </v-content>
-          </div>
+      </div>
 
   </div>
 </template>
 
 <script>
+import Article from "@/components/Article.vue";
+import ImageUpload from "@/components/ImageUpload.vue";
 export default {
   name: "BlogEdit",
-    data(){
+  components:{
+      Article,
+      ImageUpload
+  },
+  data(){
     return{
         article: '',
         database: '',
         user: this.$store.state.user,
+        showImageUpload: false,
         collections: [],
         results: [],
         select:'',
-        apiUrl: this.$store.state.apiUrl
+        articles: [],
+        apiUrl: this.$store.state.apiUrl,
+        imgUrl: this.$store.state.imageUrl,
     }
   },
   methods:{
@@ -48,7 +60,6 @@ export default {
               {
                   "database": this.database,
               }).then(result =>{
-              console.log(result);
               this.collections = result.data;
               });
       },
@@ -60,32 +71,45 @@ export default {
       },
     getCollection: function(){
         this.$http.post(this.apiUrl + '/getSection', 
-        {
-            "Database": this.database,
-            "Collection": this.select
-        }).then(result =>{
-        console.log(result);
-        });
-    },
-    getArticles: function(){
-        this.$http
-        .post(this.apiUrl +'/getSection',
-        {
+        {    
+           headers: {"Authorization" : `Bearer ${this.$store.state.jwt}`},
             "Database": this.database,
             "Collection": this.select
         })
         .then(result =>{
-            this.results = result.data.result
+        console.log(result);
+        })
+        .catch(() =>{
+        console.log('not logged in');
         });
     },
     postNews: function(){
       this.$http
       .post(this.apiUrl+ '/postNews',
       {
-        "article": this.article
+        "article": this.article,
+        "title": this.articleTitle,
+        "imgUrl": this.imgUrl,
+        "database": this.database,
+        "collection": "WellNessNews"
       }
       )
       this.getArticles();
+    },
+    getArticles: function(){
+        this.articles = [];
+        window.alert(this.$store.state.j)
+      this.$http
+      .post('http://127.0.0.1:5000/getSection',
+      {
+        "Database": "WellNessOne",
+      "Collection": this.select
+      },
+      { headers: {"Authorization" : `Bearer ${this.$store.state.jwt}`}
+      })
+      .then(result =>{
+        this.articles = result.data.result
+      });
     },
 
   },

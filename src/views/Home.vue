@@ -4,11 +4,16 @@
       <v-col cols=16 sm=4>
       </v-col>
       <v-col cols=16 sm=4>
+        <img src="@/assets/frisky_hairy.png" @click="showLogin = !showLogin" />
         <transition name=slide>
-          <Login />
+          <Login v-if="showLogin"/>
         </transition>
+    
       </v-col>
       <v-col cols=16 sm=4>
+                <transition name=slide>
+
+        </transition>
       </v-col>
     </v-row>
 
@@ -17,13 +22,16 @@
 
 <script>
 import Login from "@/components/Login.vue";
+
 export default {
   name: "Home",
   components: {
-    Login
+    Login,
   },
   data(){
     return{
+    showLogin: false,
+    showWelcome: this.$store.state
     }
   },
   methods:{
@@ -39,5 +47,14 @@ export default {
 }
 .slide-enter-active{
   transition: transform 600ms ease-out;
+}
+.slide-leave-to{
+    transform: scaleY(0)
+}
+.slide-leave{
+    transform:scaleY(1)
+}
+.slide-leave-active{
+    transition: transform 300ms ease-out;
 }
 </style>

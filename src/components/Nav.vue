@@ -1,7 +1,6 @@
 <template>
     <div>
     <v-navigation-drawer
-        v-model="drawer"
         color="black"
         :right="true"
         absolute
@@ -15,13 +14,16 @@
           <router-link to="/" class="navbar-item">Home</router-link>
         </v-list-item>
         <v-list-item>
-      <router-link to="/about" class="navbar-item">About</router-link>
+      <router-link to="/newsEdit" class="navbar-item">Add Site News</router-link>
         </v-list-item>
         <v-list-item>
-      <router-link to="/newsEdit" class="navbar-item">News</router-link>
+          <router-link to="/blogEdit">Edit Blog</router-link>
         </v-list-item>
-        <v-list-item>
-          <router-link to="/blogEdit">EditBlog</router-link>
+          <v-list-item>
+          <router-link to="/upload">UploadImage</router-link>
+        </v-list-item>
+          <v-list-item>
+          <p @click="logOut">Log Out</p>
         </v-list-item>
         </v-list>
     </v-navigation-drawer>
@@ -29,7 +31,25 @@
 </template>
 <script>
 export default {
-    name: 'Nav'
+    name: 'Nav',
+    data(){
+        return{
+            darkMode: true
+        }
+    },
+    methods:{
+        submitDarkMode: function(){
+            this.darkMode = !this.darkMode
+            window.alert(this.darkMode)
+        },
+      logOut: function(){
+        this.$store.commit({
+          type: "removeJwt",
+        });
+        this.$router.push({path: 'Home'});
+      }       
+    }
+    
 }
 </script>
 <style scoped>

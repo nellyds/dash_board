@@ -2,8 +2,15 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import BlogEdit from "../views/BlogEdit.vue";
+import ImageUpload from "../components/ImageUpload.vue";
 
-Vue.use(VueRouter);
+function routeGuard(next)
+{
+  window.alert('hi');
+ localStorage.getItem('isAuth') === 'true' ? next() : window.alert('not authenticated')
+
+}
+
 const routes = [
   {
     path: "/",
@@ -11,15 +18,22 @@ const routes = [
     component: Home
   },
   {
+    path:"/upload",
+    name:"Upload",
+    component: ImageUpload
+  },
+  {
     path: "/about",
     name: "About",
     component: () =>
       import("../views/About.vue"),
+    beforeEnter: routeGuard
   },{
   path: "/newsEdit",
   name: "NewsEdit",
   component: () =>
     import("../views/NewsEdit.vue"),
+  beforeEnter: routeGuard
   },
   {
     path:"/blogEdit",
@@ -31,13 +45,7 @@ beforeEnter:( to, from, next) =>{
 }
   }
 ];
-
-// function routeGuard(next)
-// {
-//   window.alert(localStorage.getItem('isAuth'))
-//  localStorage.getItem('isAuth') === 'true' ? next() : next({name: "Home"})
-
-// }
+Vue.use(VueRouter);
 
 const router = new VueRouter({
   mode: "history",

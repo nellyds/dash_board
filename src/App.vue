@@ -3,7 +3,7 @@
 
 
     <v-content class="app"> 
-      <Nav />
+      <Nav v-if="loggedIn"/>
       <router-view></router-view>
     </v-content>
   </v-app>
@@ -20,8 +20,12 @@ export default {
     return{
         results: [],
         user: this.$auth.user.name,
+        loggedIn: null,
     }
   },
+  beforeMount(){
+    localStorage.getItem['isAuth'] ? this.loggedIn = true : this.loggedIn = false
+  }
 };
 </script>
 <style scoped>

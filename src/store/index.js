@@ -8,7 +8,9 @@ export default new Vuex.Store({
     apiUrl: 'http://127.0.0.1:5000',
     jwt: '',
     isAuthenticated: null,
-    user: ''
+    user: '',
+    darkValue: true,
+    imageUrl: '',
   },
   mutations: {
     storeJwt(state, argument){
@@ -17,19 +19,20 @@ export default new Vuex.Store({
       if (argument.status === "logged in"){
         this.state.isAuthenticated = true;
         localStorage.setItem('isAuth', this.state.isAuthenticated)
-        window.alert(this.state.isAuthenticated)
       }
     },
-    removeJwt(state, argument){
-      window.alert(argument.message);
-      window.alert('before :'+localStorage.getItem('isAuth'))
+    removeJwt(){
       this.state.jwt = null,
       this.state.user = null,
       localStorage.removeItem('isAuth');
-      window.alert('after :'+localStorage.getItem('isAuth'))
+    },
+    addImageUrl(state, argument){
+      this.state.imageUrl = argument.imageUrl;
     }
+  },
+  actions: {
+
 
   },
-  actions: {},
   modules: {}
 });
