@@ -1,36 +1,35 @@
 <template>
   <div>
     <form v-on:submit.prevent="upload">
-
       <label for="file-input">Upload:</label>
-      <v-file-input v-model="file" >File to upload </v-file-input>
+      <v-file-input v-model="file">File to upload </v-file-input>
 
-      <v-btn  @click="upload" >Upload</v-btn>
+      <v-btn @click="upload">Upload</v-btn>
     </form>
-    <section v-if="results && results.secure_url">
+    <!-- <section v-if="results && results.secure_url">
       <img :src="results.secure_url" :alt="results.public_id" />
-    </section>
+    </section> -->
     <section>
       <ul v-if="errors.length > 0">
-        <li v-for="(error,index) in errors" :key="index">{{error}}</li>
+        <li v-for="(error, index) in errors" :key="index">{{ error }}</li>
       </ul>
     </section>
+    <p>componenturl: {{imageUrl}} </p>
   </div>
 </template>
 <script>
 import axios from "axios";
 export default {
   name: "ImageUpload",
-  components: {
-  },
+  components: {},
   data() {
     return {
       results: null,
       errors: [],
       file: null,
       filesSelected: 0,
-      cloudName: 'nelsondsilva',
-      preset: 'WellNessOne',
+      cloudName: "nelsondsilva",
+      preset: "WellNessOne",
       tags: "browser-upload",
       progress: 0,
       fileContents: null,
@@ -41,7 +40,7 @@ export default {
     prepareFormData: function() {
       this.formData = new FormData();
       this.formData.append("upload_preset", this.preset);
-      this.formData.append("tags", this.tags); 
+      this.formData.append("tags", this.tags);
       this.formData.append("file", this.fileContents);
     },
     upload: function() {
@@ -56,7 +55,7 @@ export default {
           let requestObj = {
             url: cloudinaryUploadURL,
             method: "POST",
-            data: this.formData,
+            data: this.formData
           };
           this.showProgress = true;
           axios(requestObj)
@@ -65,15 +64,14 @@ export default {
               console.log("secure_url", this.results.secure_url);
               console.log("public_id", this.results.public_id);
               this.$store.commit({
-              type: "addImageUrl",
-              imageUrl: this.results.secure_url
-
-            }) 
+                type: "addImageUrl",
+                imageUrl: this.results.secure_url
+              });
             })
             .catch(error => {
               this.errors.push(error);
               console.log(this.error);
-            })
+            });
         }.bind(this),
         false
       );
@@ -81,9 +79,12 @@ export default {
         reader.readAsDataURL(this.file);
       }
     }
+  },
+  computed:{
+    imageUrl: function(){
+      return this.$store.state.imageUrl
+    }
   }
 };
 </script>
-<style scoped>
-
-</style>
+<style scoped></style>

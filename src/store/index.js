@@ -5,34 +5,34 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    apiUrl: 'http://127.0.0.1:5000',
-    jwt: '',
+    apiUrl: "http://127.0.0.1:5000",
+    jwt: "",
     isAuthenticated: null,
-    user: '',
-    darkValue: true,
-    imageUrl: '',
+    user: "",
+    database: 'WellNessOne',
+    imageUrl: ""
   },
   mutations: {
-    storeJwt(state, argument){
+    storeJwt(state, argument) {
       this.state.jwt = argument.jwt;
       this.state.user = argument.user;
-      if (argument.status === "logged in"){
+      this.state.database = argument.database;
+      if (argument.status === "logged in") {
         this.state.isAuthenticated = true;
-        localStorage.setItem('isAuth', this.state.isAuthenticated)
+        localStorage.setItem("isAuth", this.state.isAuthenticated);
       }
+      window.alert(this.state.database);
     },
-    removeJwt(){
-      this.state.jwt = null,
-      this.state.user = null,
-      localStorage.removeItem('isAuth');
+    removeJwt() {
+      (this.state.jwt = null),
+        (this.state.user = null),
+        localStorage.removeItem("isAuth");
     },
-    addImageUrl(state, argument){
+    addImageUrl(state, argument) {
       this.state.imageUrl = argument.imageUrl;
+      window.alert(this.state.imageUrl)
     }
   },
-  actions: {
-
-
-  },
+  actions: {},
   modules: {}
 });

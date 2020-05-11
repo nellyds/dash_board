@@ -1,8 +1,8 @@
 <template>
   <v-container>
-    {{content}}
-    {{client}}
-    {{date}}
+    {{ content }}
+    {{ client }}
+    {{ date }}
   </v-container>
 </template>
 
@@ -14,7 +14,7 @@ export default {
       type: String
     },
     client: {
-      type: String,
+      type: String
     },
     date: {
       type: String

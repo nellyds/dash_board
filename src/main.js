@@ -6,8 +6,13 @@ import vuetify from "./plugins/vuetify";
 import axios from "axios";
 import "aos/dist/aos.css";
 import AOS from "aos";
-import Cloudinary from 'cloudinary-vue';
+import Cloudinary from "cloudinary-vue";
+import 'v-markdown-editor/dist/v-markdown-editor.css';
+import Editor from 'v-markdown-editor'
+import VuePageTransition from 'vue-page-transition'
 Vue.config.productionTip = false;
+Vue.use(Editor);
+Vue.use(VuePageTransition);
 
 Vue.prototype.$http = axios;
 
@@ -17,7 +22,7 @@ Vue.use(Cloudinary, {
   }
 });
 new Vue({
-  created(){
+  created() {
     AOS.init();
   },
   router,

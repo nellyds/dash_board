@@ -1,24 +1,21 @@
 <template>
   <div class="about">
-    <h1>This is an about page and ALSO an auth status page
-    </h1>
-    <p>{{auth}}</p>
-    <p>{{user}}</p>
-
+    <h1>This is an about page and ALSO an auth status page</h1>
+    <p>{{ auth }}</p>
+    <p>{{ user }}</p>
   </div>
 </template>
 <script>
 export default {
-  data(){
-    return{
+  data() {
+    return {
       auth: null,
-      user: null,
-    }
-    
+      user: null
+    };
   },
-  beforeMount(){
+  beforeMount() {
     this.auth = this.$store.state.isAuthenticated;
     this.user = this.$store.state.user;
   }
-}
+};
 </script>

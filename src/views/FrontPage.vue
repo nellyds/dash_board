@@ -1,9 +1,6 @@
 <template>
   <div class="FrontPage">
-      <v-content>
-            
-
-      </v-content>
+    <v-content> </v-content>
   </div>
 </template>
 
@@ -12,8 +9,6 @@
 
 export default {
   name: "FrontPage",
-  components: {
-
-  }
+  components: {}
 };
 </script>
