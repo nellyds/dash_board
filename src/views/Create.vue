@@ -1,13 +1,17 @@
 <template>
     <v-content>
-        <Nav />
         <p>What do you want to create?</p>
         <v-row>
             <v-col md="2">
+              <v-card
+              shaped=true
+              raised=true
+              >
                 <img class="hvr-bob" src="@/assets/write.png" id="write" v-on:click="toggle($event)" />
                 <p id="write" v-on:click="toggle($event)">Write an article </p>
                 <img class="hvr-bob" src="@/assets/link.png" id="link" v-on:click="toggle($event)" />
                 <p id="link" v-on:click="toggle($event)">Upload a Link to share</p>
+              </v-card>
             </v-col>
             <v-col md="6">
                 <div class="createContainer" >
@@ -30,7 +34,6 @@
                 </div>
             </v-col>
         </v-row>
-        <!-- <p id="place" v-on:click="toggle($event)">Talk about a place</p> -->
         <p> createImageUrl: {{imageUrl}} </p>
         <p>write : {{write}}</p>
         <p>link: {{link}} </p>
@@ -40,13 +43,11 @@
 <script>
 import ImageUpload from "@/components/ImageUpload.vue";
 import LinkUpload from "@/components/LinkUpload.vue";
-import Nav from "@/components/Nav.vue";
 export default {
     name: "Create",
     components:{
         ImageUpload,
         LinkUpload,
-        Nav
     },
     data(){
         return{
@@ -89,13 +90,13 @@ export default {
     computed:{
       imageUrl: function(){
       return this.$store.state.imageUrl
-    },
-        apiUrl: function(){
-        return this.$store.state.apiUrl;
-        },
-        database: function(){
-            return this.$store.state.database;
-        }
+      },
+      apiUrl: function(){
+      return this.$store.state.apiUrl;
+      },
+      database: function(){
+      return this.$store.state.database;
+      }
     }
 }
 </script>

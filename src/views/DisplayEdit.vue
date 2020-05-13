@@ -21,7 +21,7 @@ import ItemDisplay from "@/components/ItemDisplay.vue";
 export default {
   name: "DisplayEdit",
   components: {
-    ItemDisplay
+    ItemDisplay,
   },
   data() {
     return {

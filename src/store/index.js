@@ -19,14 +19,18 @@ export default new Vuex.Store({
       this.state.database = argument.database;
       if (argument.status === "logged in") {
         this.state.isAuthenticated = true;
-        localStorage.setItem("isAuth", this.state.isAuthenticated);
+        localStorage.setItem("isAuth", "Authenticated");
       }
       window.alert(this.state.database);
     },
     removeJwt() {
-      (this.state.jwt = null),
-        (this.state.user = null),
+      window.alert('reached')
+      this.state.jwt = null
+        this.state.user = null
+        this.state.isAuthenticated = null
+
         localStorage.removeItem("isAuth");
+        console.log(this.state)
     },
     addImageUrl(state, argument) {
       this.state.imageUrl = argument.imageUrl;

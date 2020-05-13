@@ -1,6 +1,5 @@
 <template>
     <v-content class="welcome">
-        <Nav />
         <transition name="flip">
             <div v-if="display">
                 <v-row >
@@ -21,11 +20,9 @@
     </v-content>
 </template>
 <script>
-import Nav from "@/components/Nav.vue";
 export default {
     name: 'Welcome',
     components: {
-        Nav
         },
     data(){
         return{
