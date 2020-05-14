@@ -20,8 +20,9 @@ export default new Vuex.Store({
       if (argument.status === "logged in") {
         this.state.isAuthenticated = true;
         localStorage.setItem("isAuth", "Authenticated");
+        window.alert(localStorage.isAuth)
       }
-      window.alert(this.state.database);
+      
     },
     removeJwt() {
       window.alert('reached')
@@ -34,7 +35,6 @@ export default new Vuex.Store({
     },
     addImageUrl(state, argument) {
       this.state.imageUrl = argument.imageUrl;
-      window.alert(this.state.imageUrl)
     }
   },
   actions: {},

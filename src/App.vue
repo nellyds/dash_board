@@ -1,11 +1,13 @@
 <template>
   <v-app>
     <v-content class="app">
-        <Nav  />
+        <div style="height:75px; background-color:black;">
+          
+        <Nav data-aos="fade-down" v-if="authenticated" />
+        </div>
       <vue-page-transition name="fade-in-up">
         <router-view></router-view>
       </vue-page-transition>
-      <p> auth : {{authenticated}} </p>
     </v-content>
   </v-app>
 </template>
@@ -28,22 +30,28 @@ export default {
       return this.$store.state.isAuthenticated
     }
   },
-  methods:{
-      auth: function(){
-        this.authenticated = true
-      }
-    },
     beforeMount(){
     }
   };
 </script>
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Exo+2:wght@100;500;600;900&display=swap");
-
+@media screen and (max-width: 415px){
+a:visited {
+  text-decoration: none;
+  color: white;
+}
+a {
+  text-decoration: none;
+  color: white;
+}
+}
+@media screen and (min-width: 416px){
 .app {
-	background: linear-gradient(-45deg, #ff216f, #F7CDD9, #FFF2E6, #FFEFEA,#FFD9E6, #F7CDD9,  #FFFFFF);
+	background: linear-gradient(-45deg, #ff216f, #F7CDD9, #FFFFFF, #FFF2E6, #FFEFEA,#FFD9E6, #F7CDD9,  #FFFFFF);
+  	/* background: linear-gradient(90deg, #FF4970,  #FFFFFF); */
 	background-size: 400% 400%;
-	animation: gradient 15s ease infinite;
+	animation: gradient 10s ease infinite;
   width: 100vw;
   height: 100vh;
 }
@@ -58,12 +66,6 @@ export default {
 		background-position: 0% 50%;
 	}
 }
-a:visited {
-  text-decoration: none;
-  color: white;
 }
-a {
-  text-decoration: none;
-  color: white;
-}
+
 </style>

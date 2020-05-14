@@ -1,18 +1,10 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
-import BlogEdit from "../views/BlogEdit.vue";
-import ImageUpload from "../components/ImageUpload.vue";
 import DisplayEdit from "../views/DisplayEdit.vue";
 import Create from "../views/Create.vue";
 import Welcome from "../views/Welcome.vue";
 
-function routeGuard(next) {
-  window.alert("hi");
-  localStorage.getItem("isAuth") === "true"
-    ? next()
-    : window.alert("not authenticated");
-}
 
 const routes = [
   {
@@ -21,47 +13,54 @@ const routes = [
     component: Home
   },
   {
-    path: "/upload",
-    name: "Upload",
-    component: ImageUpload
-  },
-  {
     path: "/display",
     name: "Display",
-    component: DisplayEdit
+    component: DisplayEdit,
+    beforeEnter: (to, from, next) => {
+      console.log(localStorage.isAuth)
+      if (localStorage.isAuth === "Authenticated"){
+        next()
+      } else{
+        window.alert("Are you sure you logged in? I don't beleive you")
+        next({name: 'Home'})
+      }
+    }
+  },
+  {
+    path: "/welcome",
+    name: "Welcome",
+    component: Welcome,
+    beforeEnter: (to, from, next) => {
+      console.log(localStorage.isAuth)
+      if (localStorage.isAuth === "Authenticated"){
+        next()
+      } else{
+        window.alert("Are you sure you logged in? I don't beleive you")
+        next({name: 'Home'})
+      }
+    }
+
   },
   {
     path: "/about",
     name: "About",
     component: () => import("../views/About.vue"),
-    beforeEnter: routeGuard
+
   },
   {
     path:"/create",
     name: "Create",
-    component: Create
-  },
-  {
-    path: "/newsEdit",
-    name: "NewsEdit",
-    component: () => import("../views/NewsEdit.vue"),
-    beforeEnter: routeGuard
-  },
-  {
-    path: "/blogEdit",
-    name: "BlogEdit",
-    component: BlogEdit,
+    component: Create,
     beforeEnter: (to, from, next) => {
-      localStorage.getItem("isAuth") === "true"
-        ? next()
-        : window.alert("not authenticated");
+      console.log(localStorage.isAuth)
+      if (localStorage.isAuth === "Authenticated"){
+        next()
+      } else{
+        window.alert("Are you sure you logged in? I don't beleive you")
+        next({name: 'Home'})
+      }
     }
   },
-  {
-    path: "/welcome",
-    name: "Welcome", 
-    component: Welcome
-  }
 ];
 Vue.use(VueRouter);
 

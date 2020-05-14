@@ -6,7 +6,7 @@
           <img style="height:50px" src="@/assets/icon.png" />
         <v-btn text
         class="hvr-bob"
-        :color="!isScrolling ? 'white' : 'black'"
+        color='white' 
         id="welcome"
         @click="goto($event)"
         >
@@ -15,14 +15,14 @@
         <v-btn text
         id="create"
         class="hvr-bob"
-        :color="!isScrolling ? 'white' : 'black'"
+        color='white'
         @click="goto($event)"
         >
         Create Content
         </v-btn>
         <v-btn id="display" text
         class="hvr-bob"
-        :color="!isScrolling ? 'white' : 'black'"
+        color='white'
         @click="goto($event)"
         >
         Organize Content
@@ -30,7 +30,7 @@
         <v-btn text
         class="hvr-bob"
         @click="logOut"
-        :color="!isScrolling ? 'white' : 'black'"
+        color='white'
         >
             Log Out
         </v-btn>
@@ -64,6 +64,7 @@ export default {
       this.$router.push({ path: "/" });
     },
     goto: function(event){
+      window.alert(event.target.id)
       this.$router.push({path: "/" + event.target.id})
     }
   }

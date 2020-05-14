@@ -1,6 +1,8 @@
 <template>
   <div class="displayEdit">
-
+    <div class="sectionHeader">
+      <p> Organize your content</p>
+    </div>
     <div v-if="collections.length > 0">
       <v-select
         :items="collections"
@@ -67,4 +69,10 @@ export default {
   }
 };
 </script>
-<style scoped></style>
+<style scoped>
+.sectionHeader{
+  background-color: black;
+padding: 20px;
+  color: white;
+  font-size: 2.2em;
+}</style>

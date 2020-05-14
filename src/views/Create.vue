@@ -1,9 +1,12 @@
 <template>
     <v-content>
+        <div class="sectionHeader">
         <p>What do you want to create?</p>
+        </div>
         <v-row>
-            <v-col md="2">
+            <v-col md="4">
               <v-card
+              width=300
               shaped=true
               raised=true
               >
@@ -14,6 +17,7 @@
               </v-card>
             </v-col>
             <v-col md="6">
+              <v-card shaped raised>
                 <div class="createContainer" >
                 <transition name="flip">
                     <div v-if="link" >
@@ -32,12 +36,9 @@
                         </v-form>
                 </transition>
                 </div>
+              </v-card>
             </v-col>
         </v-row>
-        <p> createImageUrl: {{imageUrl}} </p>
-        <p>write : {{write}}</p>
-        <p>link: {{link}} </p>
-        <p>{{database}}</p>
     </v-content>
 </template>
 <script>
@@ -101,6 +102,12 @@ export default {
 }
 </script>
 <style scoped>
+.sectionHeader{
+  background-color: black;
+padding: 20px;
+  color: white;
+  font-size: 2.2em;
+}
 img{
     width: 200px;
     height: 200px;
@@ -130,7 +137,7 @@ p{
 }
 .createContainer{
     height: 600px;
-    background-color: rgba(255,255,255,.2);
+    background-color: rgba(255,255,255,1);
     padding: 10px;
 }
 

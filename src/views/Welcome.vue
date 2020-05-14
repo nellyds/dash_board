@@ -1,5 +1,8 @@
 <template>
     <v-content class="welcome">
+        <div class="sectionHeader">
+            <p>Hi, {{user}}, what do you want to do today?</p>
+        </div>
         <transition name="flip">
             <div v-if="display">
                 <v-row >
@@ -11,7 +14,6 @@
                     </v-col>
                     <v-col md="6">
                         <div class="createContainer" >
-                            <p> Welcome {{user}}</p>
                         </div>
                     </v-col>
                 </v-row>
@@ -48,6 +50,12 @@ export default {
 }
 </script>
 <style scoped>
+.sectionHeader{
+  background-color: black;
+padding: 20px;
+  color: white;
+  font-size: 2.2em;
+}
 .class{
     width: 80vw;
     background-color: white;

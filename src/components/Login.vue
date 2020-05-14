@@ -1,12 +1,12 @@
 <template>
   <div class="login">
     <v-card
-      style="padding: 10px; border-top-right-radius: 25px; top-right-radius: 50px; border; background-color: rgb(255,73,112);"
+      style="padding: 10px; border; background-color: rgb(255,73,112);"
     >
       <v-card-text style="color:white; font-size:2em;">Login</v-card-text>
     </v-card>
     <v-card
-      color="rgba(255,255,255,.7)"
+      color="black"
       style="padding: 20px; border-bottom-left-radius: 25px; border-bottom-right-radius: 25px; border: solid 2px rgb(255,73,112)"
     >
       <v-card-text>
@@ -16,7 +16,7 @@
             outlined
             shaped
             label="username"
-            color="black"
+            color="white"
             v-model="user"
             >User
           </v-text-field>
@@ -25,7 +25,7 @@
             shaped
             type="password"
             label="password"
-            color="black"
+            color="white"
             v-model="password"
             >Password
           </v-text-field>
@@ -60,7 +60,6 @@ export default {
         .then(result => {
           console.log(result.data);
           if (result.data.status == "logged in") {
-            window.alert(result.data.status);
             this.$store.commit({
               type: "storeJwt",
               jwt: result.data.response,
@@ -68,7 +67,6 @@ export default {
               user: this.user,
               database: result.data.database
             });
-            window.alert(this.$store.state.user)
             this.$router.push({ path: "/welcome" });
           } else {
             window.alert("Invalid Username and Password Supplied");
@@ -104,6 +102,7 @@ export default {
 .login {
   width: 500px;
   height: 200px;
+  background-color: white;
 }
 .cardBody {
   border-bottom-left-radius: 50px;
