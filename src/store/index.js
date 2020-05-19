@@ -5,7 +5,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    apiUrl: "http://nelsondsilva.pythonanywhere.com/",
+    apiUrl: "https://nelsondsilva.pythonanywhere.com/",
     jwt: "",
     isAuthenticated: null,
     user: "",
