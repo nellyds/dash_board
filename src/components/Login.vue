@@ -33,7 +33,7 @@
         <br />
         <v-btn @click="login">login </v-btn>
         <v-btn @click="testToken">test</v-btn>
-        <v-btn @click="logOut"> LogOut</v-btn>
+        <!-- <v-btn @click="logOut"> LogOut</v-btn> -->
         <p>{{jwt}}</p>
       </v-card-text>
     </v-card>
