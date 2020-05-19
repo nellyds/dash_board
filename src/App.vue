@@ -28,10 +28,27 @@ export default {
   computed:{
     authenticated: function(){
       return this.$store.state.isAuthenticated
-    }
+    },
+
+      jwt: function(){
+        return this.$store.state.jwt
+      },
   },
-    beforeMount(){
-    }
+  methods:{
+    testToken: function() {
+      this.$http
+        .post(
+          "http://127.0.0.1:5000/protected",
+          { message: "hello" },
+          { headers: { Authorization: `Bearer ${this.$store.state.jwt}` } }
+        )
+        .then(response => {
+          console.log(response);
+          console.log(this.$store.state.jwt);
+          console.log(localStorage.getItem("isAuth"));
+        });
+    },
+  },
   };
 </script>
 <style>

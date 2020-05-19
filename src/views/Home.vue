@@ -30,7 +30,7 @@
               :value="speak"
             >
               <div class="speech-bubble">
-              <p style="color:rgb(255,73,112)">Nobody ever asks me how I am doing, not even in the perfunctory sense. </p>
+              <p >Nobody ever asks me how I am doing, not even in the perfunctory sense. </p>
               </div>
             </v-alert>
           </transition>
@@ -93,7 +93,7 @@ export default {
 	position: relative;
 	background: #ffffff;
 	border-radius: .4em;
-  color: black;
+  color:rgb(255,73,112);
   font-size: 2em;
   text-align: center;
   padding: 30px;
@@ -119,7 +119,6 @@ export default {
 	position: relative;
 	background: #ffffff;
 	border-radius: .4em;
-  border: solid 5px black;
   color: black;
   font-size: 1.1em;
   text-align: center;
@@ -135,15 +134,14 @@ export default {
 	height: 0;
 	border: 62px solid transparent;
 	border-bottom-color: white;;
-  border: solid 2px black;
 	border-top: 0;
 	border-left: 0;
 	margin-left: -31px;
 	margin-top: -62px;
 }
   img{
-    height: 325px;
-    width: 325px;
+    height: 250px;
+    width: 250px;
   }
     .intro{
   color: white;

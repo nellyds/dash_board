@@ -16,8 +16,9 @@ export default {
   methods: {
     submitLink: function() {
       this.$http
-        .post(this.apiUrl + "/newLink", {
-          url: this.linkUrl
+        .post(this.apiUrl + "/newLink", 
+        { url: this.linkUrl},
+        { headers: { Authorization: `Bearer ${this.$store.state.jwt}` }
         })
         .then(result => {
           console.log(result);

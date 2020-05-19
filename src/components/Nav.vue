@@ -4,37 +4,27 @@
       color="black"
     >
           <img style="height:50px" src="@/assets/icon.png" />
-        <v-btn text
-        class="hvr-bob"
-        color='white' 
-        id="welcome"
-        @click="goto($event)"
-        >
-        Home
-        </v-btn>
-        <v-btn text
-        id="create"
-        class="hvr-bob"
-        color='white'
-        @click="goto($event)"
-        >
-        Create Content
-        </v-btn>
-        <v-btn id="display" text
-        class="hvr-bob"
-        color='white'
-        @click="goto($event)"
-        >
-        Organize Content
-        </v-btn>
-        <v-btn text
-        class="hvr-bob"
-        @click="logOut"
-        color='white'
-        >
-            Log Out
-        </v-btn>
-
+        <v-toolbar-items>
+            <v-btn text class="hvr-bob"
+            to="/welcome"
+            color="white">
+            Home</v-btn>
+            <v-btn text class="hvr-bob"
+            to="/create"
+            color="white">
+            Create</v-btn>
+            <v-btn text class="hvr-bob"
+            to="/display"
+            color="white">
+            Organize</v-btn>
+            <v-btn text
+            class="hvr-bob"
+            color='white'
+            to="/"
+            >
+                <span @click="logOut">   Log Out</span>
+            </v-btn>
+        </v-toolbar-items>
     </v-app-bar>
   </div>
 </template>
@@ -64,7 +54,6 @@ export default {
       this.$router.push({ path: "/" });
     },
     goto: function(event){
-      window.alert(event.target.id)
       this.$router.push({path: "/" + event.target.id})
     }
   }

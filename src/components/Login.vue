@@ -34,6 +34,7 @@
         <v-btn @click="login">login </v-btn>
         <v-btn @click="testToken">test</v-btn>
         <v-btn @click="logOut"> LogOut</v-btn>
+        <p>{{jwt}}</p>
       </v-card-text>
     </v-card>
   </div>
@@ -45,7 +46,7 @@ export default {
     return {
       showLogin: false,
       apiUrl: this.$store.state.apiUrl,
-      jwt: this.$store.state.jwt,
+      // jwt: this.$store.state.jwt,
       password: "",
       user: ""
     };
@@ -80,7 +81,6 @@ export default {
       this.$http
         .post(
           this.apiUrl + "/protected",
-          { message: "hello" },
           { headers: { Authorization: `Bearer ${this.$store.state.jwt}` } }
         )
         .then(response => {
@@ -94,11 +94,13 @@ export default {
         type: "removeJwt",
         message: "hi"
       });
+    },
     }
   }
-};
+
 </script>
 <style lang="scss" scoped>
+@media screen and (min-width: 416px){
 .login {
   width: 500px;
   height: 200px;
@@ -107,5 +109,17 @@ export default {
 .cardBody {
   border-bottom-left-radius: 50px;
   border-bottom-right-radius: 50px;
+}
+}
+@media screen and (max-width: 415px){
+.login{
+  width: 375px;
+  height: 300px;
+  background-color: white;
+}
+.cardBody {
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+}
 }
 </style>

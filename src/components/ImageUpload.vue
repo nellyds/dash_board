@@ -6,15 +6,13 @@
 
       <v-btn @click="upload">Upload</v-btn>
     </form>
-    <!-- <section v-if="results && results.secure_url">
-      <img :src="results.secure_url" :alt="results.public_id" />
-    </section> -->
     <section>
       <ul v-if="errors.length > 0">
         <li v-for="(error, index) in errors" :key="index">{{ error }}</li>
       </ul>
     </section>
-    <p>componenturl: {{imageUrl}} </p>
+    <p>Image Upload Url: {{imageUrl}} </p>
+    <v-btn text @click="clearUpload">Clear</v-btn>
   </div>
 </template>
 <script>
@@ -78,6 +76,11 @@ export default {
       if (this.file && this.file.name) {
         reader.readAsDataURL(this.file);
       }
+    },
+    clearUpload: function(){
+        this.$store.commit({
+        type: 'removeImageUrl'
+        });
     }
   },
   computed:{

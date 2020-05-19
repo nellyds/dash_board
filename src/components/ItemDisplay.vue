@@ -1,5 +1,8 @@
 <template>
   <v-content>
+    <div>
+
+    </div>
       <div class="displayCard">
         <v-card
             style="padding: 10px; border-top-right-radius: 25px; top-right-radius: 50px; border; background-color: rgb(255,73,112);"
@@ -7,9 +10,30 @@
         <v-card-text style="color:white; font-size:2em;">{{title}}</v-card-text>
         </v-card>
         <v-card>
-            <p>{{collection}}</p>
-            <v-btn @click="edit = !edit" text>Edit this item</v-btn>
+            <!-- <p>{{collection}}</p> -->
+            <!-- <v-btn @click="edit = !edit" text>Edit this item</v-btn> -->
             <v-btn @click="deleteItem" text>Delete this item</v-btn>
+                <v-alert
+                v-if="confirmWarning"
+                data-aos="fade-left"
+                border="right"
+                colored-border
+                type="warning"
+                elevation="2"
+              >
+                Are you sure you want to delete this item?
+                <v-btn text @click="confirmDelete" >Confirm</v-btn>
+              </v-alert>
+                              <v-alert
+                v-if="deleted"
+                data-aos="fade-left"
+                border="right"
+                colored-border
+                type="warning"
+                elevation="2"
+              >
+                Item Deleted
+              </v-alert>
             <transition name="flip">
             <div v-if="edit">
             <ItemEdit
@@ -41,31 +65,37 @@ export default {
   data() {
     return {
       edit: false,
-      confirmPopup: false,
-      confirm: false
+      confirmWarning: false,
+      confirm: false,
+      deleted: false
     };
   },
   methods:{
     deleteItem: function(){
+      this.confirmWarning = true
+    },
+    confirmDelete: function(){
       this.$http.post(this.apiUrl + "/deleteItem",
-      {
-        database: this.database,
+      { database: this.database,
         collection: this.collection,
-        _id: this._id
+        _id: this._id},
+      { headers: { Authorization: `Bearer ${this.$store.state.jwt}` }
       }).then(result =>{
-        if (result.data.result == 'Success'){
-          window.alert('Item deleted successfully?')
+        
+        if (result.data == 'article deleted'){
+          this.confirmWarning = false;
+          this.deleted =true
         }
       }).catch(() => console.log('Data access error'))
-
     }
   },
-  watched: {
+  computed: {
     apiUrl: function(){
       return this.$store.state.apiUrl
-    }
+    },
+  },
   }
-};
+
 </script>
 <style scoped>
 .displayCard{

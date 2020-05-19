@@ -27,24 +27,21 @@ export default {
   },
   data() {
     return {
-      database: null,
       collections: [],
       items: [],
       fields: [],
       selectedCollection: "",
       index: 0,
       json: "",
-      apiUrl: this.$store.state.apiUrl
     };
   },
   methods: {
     submitDB: function() {
-      this.$http
-        .post(this.apiUrl + "/getAllCollections", {
-          database: this.database
-        })
-        .then(result => {
-          this.collections = result.data;
+      this.$http.post(this.apiUrl + "/getAllCollections", 
+            { database: this.database },
+            { headers: { Authorization: `Bearer ${this.$store.state.jwt}` }
+            }).then(result => {
+            this.collections = result.data;
         });
     },
     getDisplayedRecords: function() {
@@ -66,7 +63,19 @@ export default {
   beforeMount() {
     this.database = "WellNessOne";
     this.submitDB();
-  }
+  },
+  computed:{
+      imageUrl: function(){
+      return this.$store.state.imageUrl
+      },
+      apiUrl: function(){
+      return this.$store.state.apiUrl;
+      },
+      database: function(){
+      return this.$store.state.database;
+      }
+    }
+
 };
 </script>
 <style scoped>

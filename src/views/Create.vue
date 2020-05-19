@@ -14,6 +14,8 @@
                 <p id="write" v-on:click="toggle($event)">Write an article </p>
                 <img class="hvr-bob" src="@/assets/link.png" id="link" v-on:click="toggle($event)" />
                 <p id="link" v-on:click="toggle($event)">Upload a Link to share</p>
+                <img class="hvr-bob" src="@/assets/profile.png" id="profile" v-on:click="toggle($event)" />
+                <p id="profile" v-on:click="toggle($event)">Upload a profile</p>
               </v-card>
             </v-col>
             <v-col md="6">
@@ -35,6 +37,25 @@
                         <v-btn type="submitItem">Submit new article</v-btn>
                         </v-form>
                 </transition>
+                <transition name="flip">
+                  <v-form v-if="profile" action="#" @submit.prevent="submitProfile">
+                    <v-text-field v-model="profileName" label=profileName />
+                    <v-text-field v-model="role" label=role />
+                    <ImageUpload />
+                    <v-btn type="submitProfile">Submit new profile</v-btn>
+                  </v-form>
+                </transition>
+                                <v-alert
+                v-if="error"
+                data-aos="fade-left"
+                border="right"
+                colored-border
+                type="warning"
+                elevation="2"
+              >
+                Are you sure you want to delete this item?
+                <v-btn text @click="confirmDelete" >Confirm</v-btn>
+              </v-alert>
                 </div>
               </v-card>
             </v-col>
@@ -55,10 +76,13 @@ export default {
             link: false,
             write: false,
             image: false,
-            place: false,
+            profile: false,
+            error: null,
             article: '',
             title: '',
             collection: "WellNessNews",
+            profileName: '',
+            role: ''
         }
     },
     methods:{
@@ -66,26 +90,52 @@ export default {
             if (event.target.id == 'write'){
                 this.write = !this.write
                 this.link = false
-                this.place = false
+                this.profile = false
             }
             if (event.target.id == 'link'){
                 this.link = !this.link
                 this.write = false;
-                this.place = false;
+                this.profile = false;
+            }
+            if (event.target.id == 'profile'){
+              this.profile = !this.profile
+              this.write = false;
+              this.link = false
             }
         },
         submitItem: function(){
-            this.$http.post(this.apiUrl + "/postNews", {
-                article: this.article,
-                database: this.database,
-                collection: this.collection,
-                title: this.title,
-                imgUrl: this.imageUrl
+            this.$http.post(this.apiUrl + "/postNews", 
+                { article: this.article,
+                  database: this.database,
+                  collection: this.collection,
+                  title: this.title,
+                  imgUrl: this.imageUrl},
+                { headers: { Authorization: `Bearer ${this.$store.state.jwt}` }
             }).then(result =>{
                 window.alert(result.data)
+                this.$store.commit({
+              type: 'removeImageUrl'
+            });   
             }).catch(() =>{
                 console.log("Error connecting to server resource")
             })
+        },
+        submitProfile: function(){
+          if (this.profileName != null && this.role != null && this.imageUrl != null){
+          this.$http.post(this.apiUrl + "/postProfile", 
+          { name: this.profileName,
+            role: this.role,
+            imgUrl: this.imageUrl},
+          { headers: { Authorization: `Bearer ${this.$store.state.jwt}` }
+          }).then(result =>{
+            console.log(result)
+            this.$store.commit({
+              type: 'removeImageUrl'
+            });
+          }).catch(()=>{
+            console.log("Error connecting to server resource")
+          })
+        }
         }
     },
     computed:{

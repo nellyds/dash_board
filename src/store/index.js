@@ -35,6 +35,9 @@ export default new Vuex.Store({
     },
     addImageUrl(state, argument) {
       this.state.imageUrl = argument.imageUrl;
+    },
+    removeImageUrl() {
+      this.state.imageUrl = null
     }
   },
   actions: {},
