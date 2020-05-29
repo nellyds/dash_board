@@ -1,88 +1,111 @@
 <template>
-  <v-app>
-    <v-content class="app">
-        <div style="height:75px; background-color:black;">
-          
-        <Nav data-aos="fade-down" v-if="authenticated" />
-        </div>
-      <vue-page-transition name="fade-in-up">
-        <router-view></router-view>
-      </vue-page-transition>
+  <v-app id="inspire">
+    <v-navigation-drawer
+      v-model="drawer"
+      app
+      color="black"
+      width="175"
+    >
+    <img @click="bark" style="height:100px; margin-left: 50px;" src="@/assets/icon.png" />
+      <v-list dense>
+        <v-list-item link>
+          <v-list-item-action>
+            <v-icon>mdi-home</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+                       <v-btn text class="hvr-bob"
+            to="/create"
+            color="white">
+            Create</v-btn>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item link>
+          <v-list-item-action>
+            <v-icon>mdi-contact-mail</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+                        <v-btn text class="hvr-bob"
+            to="/display"
+            color="white">
+            Organize</v-btn>
+          </v-list-item-content>
+        </v-list-item>
+                <v-list-item link>
+          <v-list-item-action>
+            <v-icon>mdi-contact-mail</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+                        <v-btn text class="hvr-bob"
+            to="/email"
+            color="white">
+            Email</v-btn>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+
+    <v-app-bar
+      app
+      color="black"
+      dark
+    >
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-toolbar-title>Sit, Rex.</v-toolbar-title>
+
+    </v-app-bar>
+    <v-content>
+      <transition name="down">
+            <router-view ></router-view>
+      </transition>
     </v-content>
+    <v-footer
+      color="black"
+      app
+    >
+      <span class="white--text">Sit-Rex&copy; 2020 design by Nelson D'Silva</span>
+    </v-footer>
   </v-app>
 </template>
 
 <script>
-import Nav from "@/components/Nav.vue";
-export default {
-  name: "App",
-  components: {
-    Nav
-  },
-  data() {
-    return {
-      results: [],
-      user: this.$auth.user.name,
-    };
-  },
-  computed:{
-    authenticated: function(){
-      return this.$store.state.isAuthenticated
-    },
 
-      jwt: function(){
-        return this.$store.state.jwt
-      },
-  },
-  methods:{
-    testToken: function() {
-      this.$http
-        .post(
-          "http://127.0.0.1:5000/protected",
-          { message: "hello" },
-          { headers: { Authorization: `Bearer ${this.$store.state.jwt}` } }
-        )
-        .then(response => {
-          console.log(response);
-          console.log(this.$store.state.jwt);
-          console.log(localStorage.getItem("isAuth"));
-        });
+  export default {
+    props: {
+      source: String,
     },
-  },
-  };
+    data: () => ({
+      drawer: null,
+    }),
+    methods: {
+      bark: function(){
+        console.log('Hello.')
+      }
+    }
+  }
 </script>
-<style>
-@import url("https://fonts.googleapis.com/css2?family=Exo+2:wght@100;500;600;900&display=swap");
-@media screen and (max-width: 415px){
-a:visited {
-  text-decoration: none;
-  color: white;
+<style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;1,200;1,500&display=swap');
+body{
+  font-family: Poppins;
 }
-a {
-  text-decoration: none;
-  color: white;
+.down-enter{
+  transform: scaleY(-1200px);
+  opacity: 0
 }
+.down-enter-to{
+  transform: scaleY(0px);
+  opacity:1
 }
-@media screen and (min-width: 416px){
-.app {
-	background: linear-gradient(-45deg, #ff216f, #F7CDD9, #FFFFFF, #FFF2E6, #FFEFEA,#FFD9E6, #F7CDD9,  #FFFFFF);
-  	/* background: linear-gradient(90deg, #FF4970,  #FFFFFF); */
-	background-size: 400% 400%;
-	animation: gradient 10s ease infinite;
-  width: 100vw;
-  height: 100vh;
+.down-enter-active{
+  transition: opacity 1000ms ease-in-out;
 }
-@keyframes gradient {
-	0% {
-		background-position: 0% 50%;
-	}
-	50% {
-		background-position: 100% 50%;
-	}
-	100% {
-		background-position: 0% 50%;
-	}
+/* .down-leave{
+  opacity:1
 }
+.down-leave-to{
+  opacity:0
 }
-
+.down-leave-active{
+  transition: opacity 500ms ease-out
+} */
 </style>

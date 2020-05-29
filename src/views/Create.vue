@@ -1,10 +1,11 @@
 <template>
-    <v-content>
+      <div>
         <div class="sectionHeader">
         <p>What do you want to create?</p>
         </div>
         <v-row>
-            <v-col md="4">
+          <v-col md="1" />
+            <v-col md="3">
               <v-card
               width=300
               shaped=true
@@ -60,7 +61,7 @@
               </v-card>
             </v-col>
         </v-row>
-    </v-content>
+  </div>
 </template>
 <script>
 import ImageUpload from "@/components/ImageUpload.vue";

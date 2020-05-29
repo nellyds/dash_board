@@ -84,4 +84,5 @@ export default {
 padding: 20px;
   color: white;
   font-size: 2.2em;
-}</style>
+}
+</style>

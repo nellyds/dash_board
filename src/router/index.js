@@ -4,7 +4,7 @@ import Home from "../views/Home.vue";
 import DisplayEdit from "../views/DisplayEdit.vue";
 import Create from "../views/Create.vue";
 import Welcome from "../views/Welcome.vue";
-
+import Email from "../views/Email.vue";
 
 const routes = [
   {
@@ -61,6 +61,20 @@ const routes = [
       }
     }
   },
+  {
+    path:"/email",
+    name: "Email",
+    component: Email,
+    beforeEnter: (to, from, next) => {
+      console.log(localStorage.isAuth)
+      if (localStorage.isAuth === "Authenticated"){
+        next()
+      } else{
+        window.alert("Are you sure you logged in? I don't beleive you")
+        next({name: 'Home'})
+      }
+    }
+  }
 ];
 Vue.use(VueRouter);
 

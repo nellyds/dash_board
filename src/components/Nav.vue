@@ -5,10 +5,7 @@
     >
           <img style="height:50px" src="@/assets/icon.png" />
         <v-toolbar-items>
-            <v-btn text class="hvr-bob"
-            to="/welcome"
-            color="white">
-            Home</v-btn>
+
             <v-btn text class="hvr-bob"
             to="/create"
             color="white">
@@ -37,7 +34,8 @@ export default {
       items:[
         {name: 'Home', to: "/"},
         {name: 'Create Content', to: "/create"},
-        {name: 'Organize Content', to: "/display"}
+        {name: 'Organize Content', to: "/display"},
+        {name: 'Write an Email', to:'/email'}
       ]
     };
   },
