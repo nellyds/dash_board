@@ -9,7 +9,7 @@ export default new Vuex.Store({
     jwt: "",
     isAuthenticated: null,
     user: "",
-    database: 'WellNessOne',
+    database: "WellNessOne",
     imageUrl: ""
   },
   mutations: {
@@ -20,24 +20,23 @@ export default new Vuex.Store({
       if (argument.status === "logged in") {
         this.state.isAuthenticated = true;
         localStorage.setItem("isAuth", "Authenticated");
-        window.alert(localStorage.isAuth)
+        window.alert(localStorage.isAuth);
       }
-      
     },
     removeJwt() {
-      window.alert('reached')
-      this.state.jwt = null
-        this.state.user = null
-        this.state.isAuthenticated = null
+      // window.alert("reached");
+      this.state.jwt = null;
+      this.state.user = null;
+      this.state.isAuthenticated = null;
 
-        localStorage.removeItem("isAuth");
-        console.log(this.state)
+      localStorage.removeItem("isAuth");
+      console.log(this.state);
     },
     addImageUrl(state, argument) {
       this.state.imageUrl = argument.imageUrl;
     },
     removeImageUrl() {
-      this.state.imageUrl = null
+      this.state.imageUrl = null;
     }
   },
   actions: {},

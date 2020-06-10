@@ -11,7 +11,7 @@
         <li v-for="(error, index) in errors" :key="index">{{ error }}</li>
       </ul>
     </section>
-    <p>Image Upload Url: {{imageUrl}} </p>
+    <p>Image Upload Url: {{ imageUrl }}</p>
     <v-btn text @click="clearUpload">Clear</v-btn>
   </div>
 </template>
@@ -77,15 +77,15 @@ export default {
         reader.readAsDataURL(this.file);
       }
     },
-    clearUpload: function(){
-        this.$store.commit({
-        type: 'removeImageUrl'
-        });
+    clearUpload: function() {
+      this.$store.commit({
+        type: "removeImageUrl"
+      });
     }
   },
-  computed:{
-    imageUrl: function(){
-      return this.$store.state.imageUrl
+  computed: {
+    imageUrl: function() {
+      return this.$store.state.imageUrl;
     }
   }
 };

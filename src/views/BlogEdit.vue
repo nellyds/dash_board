@@ -39,7 +39,7 @@
 
 <script>
 import Article from "@/components/Article.vue";
-import ImageUpload from "@/components/ImageUpload.vue";
+import ImageUpload from "@/components/Util/ImageUpload.vue";
 import Nav from "@/components/Nav.vue";
 export default {
   name: "BlogEdit",

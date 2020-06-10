@@ -1,27 +1,16 @@
 <template>
   <div>
-    <v-app-bar
-      color="black"
-    >
-          <img style="height:50px" src="@/assets/icon.png" />
-        <v-toolbar-items>
-
-            <v-btn text class="hvr-bob"
-            to="/create"
-            color="white">
-            Create</v-btn>
-            <v-btn text class="hvr-bob"
-            to="/display"
-            color="white">
-            Organize</v-btn>
-            <v-btn text
-            class="hvr-bob"
-            color='white'
-            to="/"
-            >
-                <span @click="logOut">   Log Out</span>
-            </v-btn>
-        </v-toolbar-items>
+    <v-app-bar color="black">
+      <img style="height:50px" src="@/assets/icon.png" />
+      <v-toolbar-items>
+        <v-btn text class="hvr-bob" to="/create" color="white"> Create</v-btn>
+        <v-btn text class="hvr-bob" to="/display" color="white">
+          Organize</v-btn
+        >
+        <v-btn text class="hvr-bob" color="white" to="/">
+          <span @click="logOut"> Log Out</span>
+        </v-btn>
+      </v-toolbar-items>
     </v-app-bar>
   </div>
 </template>
@@ -31,11 +20,11 @@ export default {
   data() {
     return {
       darkMode: true,
-      items:[
-        {name: 'Home', to: "/"},
-        {name: 'Create Content', to: "/create"},
-        {name: 'Organize Content', to: "/display"},
-        {name: 'Write an Email', to:'/email'}
+      items: [
+        { name: "Home", to: "/" },
+        { name: "Create Content", to: "/create" },
+        { name: "Organize Content", to: "/display" },
+        { name: "Write an Email", to: "/email" }
       ]
     };
   },
@@ -51,8 +40,8 @@ export default {
       window.alert("Goodbye!");
       this.$router.push({ path: "/" });
     },
-    goto: function(event){
-      this.$router.push({path: "/" + event.target.id})
+    goto: function(event) {
+      this.$router.push({ path: "/" + event.target.id });
     }
   }
 };
@@ -98,13 +87,15 @@ a:visited {
   transform: perspective(1px) translateZ(0);
   box-shadow: 0 0 1px rgba(0, 0, 0, 0);
 }
-.hvr-bob:hover, .hvr-bob:focus, .hvr-bob:active {
+.hvr-bob:hover,
+.hvr-bob:focus,
+.hvr-bob:active {
   -webkit-animation-name: hvr-bob-float, hvr-bob;
   animation-name: hvr-bob-float, hvr-bob;
-  -webkit-animation-duration: .3s, 1.5s;
-  animation-duration: .3s, 1.5s;
-  -webkit-animation-delay: 0s, .3s;
-  animation-delay: 0s, .3s;
+  -webkit-animation-duration: 0.3s, 1.5s;
+  animation-duration: 0.3s, 1.5s;
+  -webkit-animation-delay: 0s, 0.3s;
+  animation-delay: 0s, 0.3s;
   -webkit-animation-timing-function: ease-out, ease-in-out;
   animation-timing-function: ease-out, ease-in-out;
   -webkit-animation-iteration-count: 1, infinite;
@@ -114,5 +105,4 @@ a:visited {
   -webkit-animation-direction: normal, alternate;
   animation-direction: normal, alternate;
 }
-
 </style>

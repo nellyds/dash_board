@@ -1,15 +1,11 @@
 <template>
-    <div>
-        <img :src="imgUrl" />
-        <p> {{name}}</p>
-        <p> {{role}} </p>
-    </div>
+  <div>
+    <img :src="imgUrl" />
+    <p>{{ name }}</p>
+    <p>{{ role }}</p>
+  </div>
 </template>
 <script>
-export default {
-    
-}
+export default {};
 </script>
-<style scoped>
-
-</style>
+<style scoped></style>

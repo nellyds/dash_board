@@ -7,13 +7,8 @@
         <v-card-title> {{ selectedField }}</v-card-title>
         <v-card-text>{{ currentValue }}</v-card-text>
       </v-card>
-      <v-textarea
-        v-model="updateContent"
-        label="Content"
-      />
-      <v-btn @click="submitUpdate" text
-        >Submit Changes</v-btn
-      >
+      <v-textarea v-model="updateContent" label="Content" />
+      <v-btn @click="submitUpdate" text>Submit Changes</v-btn>
     </div>
   </v-content>
 </template>
@@ -65,8 +60,7 @@ export default {
         collection: this.collection,
         update: [this.selectedField, this.updateContent]
       };
-      this.$http.post(this.$store.state.apiUrl + "/editItem", k
-      )
+      this.$http.post(this.$store.state.apiUrl + "/editItem", k);
     }
   }
 };

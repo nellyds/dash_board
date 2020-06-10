@@ -17,12 +17,12 @@ const routes = [
     name: "Display",
     component: DisplayEdit,
     beforeEnter: (to, from, next) => {
-      console.log(localStorage.isAuth)
-      if (localStorage.isAuth === "Authenticated"){
-        next()
-      } else{
-        window.alert("Are you sure you logged in? I don't beleive you")
-        next({name: 'Home'})
+      console.log(localStorage.isAuth);
+      if (localStorage.isAuth === "Authenticated") {
+        next();
+      } else {
+        window.alert("Are you sure you logged in? I don't beleive you");
+        next({ name: "Home" });
       }
     }
   },
@@ -31,47 +31,45 @@ const routes = [
     name: "Welcome",
     component: Welcome,
     beforeEnter: (to, from, next) => {
-      console.log(localStorage.isAuth)
-      if (localStorage.isAuth === "Authenticated"){
-        next()
-      } else{
-        window.alert("Are you sure you logged in? I don't beleive you")
-        next({name: 'Home'})
+      console.log(localStorage.isAuth);
+      if (localStorage.isAuth === "Authenticated") {
+        next();
+      } else {
+        window.alert("Are you sure you logged in? I don't beleive you");
+        next({ name: "Home" });
       }
     }
-
   },
+  // {
+  //   path: "/about",
+  //   name: "About",
+  //   component: () => import("../views/About.vue")
+  // },
   {
-    path: "/about",
-    name: "About",
-    component: () => import("../views/About.vue"),
-
-  },
-  {
-    path:"/create",
+    path: "/create",
     name: "Create",
     component: Create,
     beforeEnter: (to, from, next) => {
-      console.log(localStorage.isAuth)
-      if (localStorage.isAuth === "Authenticated"){
-        next()
-      } else{
-        window.alert("Are you sure you logged in? I don't beleive you")
-        next({name: 'Home'})
+      console.log(localStorage.isAuth);
+      if (localStorage.isAuth === "Authenticated") {
+        next();
+      } else {
+        window.alert("Are you sure you logged in? I don't beleive you");
+        next({ name: "Home" });
       }
     }
   },
   {
-    path:"/email",
+    path: "/email",
     name: "Email",
     component: Email,
     beforeEnter: (to, from, next) => {
-      console.log(localStorage.isAuth)
-      if (localStorage.isAuth === "Authenticated"){
-        next()
-      } else{
-        window.alert("Are you sure you logged in? I don't beleive you")
-        next({name: 'Home'})
+      console.log(localStorage.isAuth);
+      if (localStorage.isAuth === "Authenticated") {
+        next();
+      } else {
+        window.alert("Are you sure you logged in? I don't beleive you");
+        next({ name: "Home" });
       }
     }
   }

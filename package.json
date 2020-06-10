@@ -16,6 +16,7 @@
     "v-markdown-editor": "^1.2.5",
     "vue": "^2.6.11",
     "vue-page-transition": "^0.2.2",
+    "vue-paginate": "^3.6.0",
     "vue-router": "^3.1.5",
     "vuejs-progress-bar": "^1.2.2",
     "vuetify": "^2.2.11",
