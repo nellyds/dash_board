@@ -11,7 +11,7 @@
     "@ckeditor/ckeditor5-build-classic": "^19.0.2",
     "@ckeditor/ckeditor5-vue": "^1.0.1",
     "aos": "^3.0.0-beta.6",
-    "auth0-js": "^9.12.2",
+    "auth0-js": "^9.13.2",
     "axios": "^0.19.2",
     "cloudinary-vue": "^1.0.1",
     "core-js": "^3.6.4",
