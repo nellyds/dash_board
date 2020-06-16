@@ -7,8 +7,9 @@
           v-on:click="toggle($event)"
         />
         <v-form action="#" @submit.prevent="submitItem">
-          <v-text-field v-model="title" label="title" />
-          <v-textarea v-model="article" label="article">type here</v-textarea>
+          <v-text-field v-model="title" label="title of the article" />
+<ckeditor :editor="editor" v-model="editorData" :config="editorConfig"></ckeditor>
+
           <v-btn @click="image = !image" text
             >Add a header image to the article</v-btn
           >
@@ -20,6 +21,7 @@
     </v-content>
 </template>
 <script>
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import ImageUpload from "@/components/Util/ImageUpload";
 export default {
     components:{
@@ -36,32 +38,38 @@ export default {
       title: "",
       collection: "WellNessNews",
       profileName: "",
-      role: ""
+      role: "",
+                      editor: ClassicEditor,
+                editorData: '',
+                editorConfig: {
+                    // The configuration of the rich-text editor.
+                }
     };
   },
   methods: {
           submitItem: function() {
-      this.$http
-        .post(
-          this.apiUrl + "/postNews",
-          {
-            article: this.article,
-            database: this.database,
-            collection: this.collection,
-            title: this.title,
-            imgUrl: this.imageUrl
-          },
-          { headers: { Authorization: `Bearer ${this.$store.state.jwt}` } }
-        )
-        .then(result => {
-          window.alert(result.data);
-          this.$store.commit({
-            type: "removeImageUrl"
-          });
-        })
-        .catch(() => {
-          console.log("Error connecting to server resource");
-        });
+      // this.$http
+      //   .post(
+      //     this.apiUrl + "/postNews",
+      //     {
+      //       article: this.editorData,
+      //       database: this.database,
+      //       collection: this.collection,
+      //       title: this.title,
+      //       imgUrl: this.imageUrl
+      //     },
+      //     { headers: { Authorization: `Bearer ${this.$store.state.jwt}` } }
+      //   )
+      //   .then(result => {
+      //     window.alert(result.data);
+      //     this.$store.commit({
+      //       type: "removeImageUrl"
+      //     });
+      //   })
+      //   .catch(() => {
+      //     console.log("Error connecting to server resource");
+      //   });
+      console.log({article: this.editorData, database: this.database, collection: this.collection, title: this.title, imgurl: this.imageUrl})
     },
   },
     computed: {
