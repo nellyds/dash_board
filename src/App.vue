@@ -6,7 +6,7 @@
         style="height:100px; margin-left: 50px;"
         src="@/assets/icon.png"
       />
-      <v-list  v-if="isLoggedIn" dense>
+      <v-list v-if="isLoggedIn" dense>
         <v-list-item link>
           <v-list-item-action> </v-list-item-action>
           <v-list-item-content>
@@ -29,7 +29,7 @@
             <v-btn text class="hvr-bob" to="/email" color="black"> Email</v-btn>
           </v-list-item-content>
         </v-list-item>
-          <v-list-item link>
+        <v-list-item link>
           <v-list-item-action> </v-list-item-action>
           <v-list-item-content>
             <v-btn text @click="logOut" color="black"> LogOut</v-btn>
@@ -40,7 +40,7 @@
 
     <v-app-bar app color="black" dark>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title @click="home" >Sit, Rex.</v-toolbar-title>
+      <v-toolbar-title @click="home">Sit, Rex.</v-toolbar-title>
     </v-app-bar>
     <v-content>
       <transition name="down">
@@ -67,17 +67,17 @@ export default {
     bark: function() {
       console.log("Hello.");
     },
-    logOut: function(){
-      this.$store.commit({type: 'removeJwt'})
-      this.$router.push({path: "/"})
+    logOut: function() {
+      this.$store.commit({ type: "removeJwt" });
+      this.$router.push({ path: "/" });
     },
-    home: function(){
-      this.$router.push({"path": "/"})
+    home: function() {
+      this.$router.push({ path: "/" });
     }
   },
-  computed:{
-    isLoggedIn: function(){
-      return this.$store.state.isAuthenticated
+  computed: {
+    isLoggedIn: function() {
+      return this.$store.state.isAuthenticated;
     }
   }
 };

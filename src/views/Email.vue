@@ -4,34 +4,38 @@
       <p>Let's write an email.</p>
     </div>
     <div style="height: 100%;">
-    <v-tabs v-if="$vuetify.breakpoint.smAndUp" vertical background-color="white">
-      <v-tab color="black">
-        <p>Write email</p>
-      </v-tab>
-      <v-tab color="black">
-        <p>Edit subscriber list</p>
-      </v-tab>
-      <v-tab-item>
+      <v-tabs
+        v-if="$vuetify.breakpoint.smAndUp"
+        vertical
+        background-color="white"
+      >
+        <v-tab color="black">
+          <p>Write email</p>
+        </v-tab>
+        <v-tab color="black">
+          <p>Edit subscriber list</p>
+        </v-tab>
+        <v-tab-item>
           <SendNewsLetter />
-      </v-tab-item>
-      <v-tab-item>
-        <EmailList />
-      </v-tab-item>
-    </v-tabs>
-    <v-tabs v-else background-color="black" dark>
-      <v-tab color="white">
-        <p>Write email</p>
-      </v-tab>
-      <v-tab color="white">
-        <p>Edit subscriber list</p>
-      </v-tab>
-      <v-tab-item>
+        </v-tab-item>
+        <v-tab-item>
+          <EmailList />
+        </v-tab-item>
+      </v-tabs>
+      <v-tabs v-else background-color="black" dark>
+        <v-tab color="white">
+          <p>Write email</p>
+        </v-tab>
+        <v-tab color="white">
+          <p>Edit subscriber list</p>
+        </v-tab>
+        <v-tab-item>
           <SendNewsLetter />
-      </v-tab-item>
-      <v-tab-item>
-        <EmailList />
-      </v-tab-item>
-    </v-tabs>
+        </v-tab-item>
+        <v-tab-item>
+          <EmailList />
+        </v-tab-item>
+      </v-tabs>
     </div>
   </div>
 </template>
@@ -39,27 +43,27 @@
 import EmailList from "@/components/Email/EmailList.vue";
 import SendNewsLetter from "@/components/Email/SendNewsLetter.vue";
 export default {
-  name: 'Email',
-  components:{
+  name: "Email",
+  components: {
     SendNewsLetter,
     EmailList
   },
-  data(){
-    return{
-      heading: '',
-      subheading:'',
-      collection: '',
-      article: '',
+  data() {
+    return {
+      heading: "",
+      subheading: "",
+      collection: "",
+      article: "",
       image: false,
       loading: false,
       message: null,
       subscribers: [],
       fetchingSubscribers: false
-    }
+    };
   },
   methods: {
     submitItem: function() {
-      this.loading = true
+      this.loading = true;
       this.$http
         .post(
           this.apiUrl + "/sendMail",
@@ -73,28 +77,33 @@ export default {
           { headers: { Authorization: `Bearer ${this.$store.state.jwt}` } }
         )
         .then(result => {
-          this.loading = false
-          this.message = result.data.message
+          this.loading = false;
+          this.message = result.data.message;
           this.$store.commit({
             type: "removeImageUrl"
           });
         })
         .catch(() => {
           console.log("Error connecting to server resource");
-        })
-        },
-        getSubscriberList: function() {
-        this.fetchingSubscribers = true;
-        this.$http.post(this.apiUrl + "subscribers/get",{database: this.database},{ headers: { Authorization: `Bearer ${this.$store.state.jwt}` } })
-          .then(result => {
+        });
+    },
+    getSubscriberList: function() {
+      this.fetchingSubscribers = true;
+      this.$http
+        .post(
+          this.apiUrl + "subscribers/get",
+          { database: this.database },
+          { headers: { Authorization: `Bearer ${this.$store.state.jwt}` } }
+        )
+        .then(result => {
           this.subscribers = result.data.subscribers;
           console.log(this.subscribers);
           this.fetchingSubscribers = false;
         })
-          .catch(() =>{
-            console.log("Internal Service Error");
-          })
-        },
+        .catch(() => {
+          console.log("Internal Service Error");
+        });
+    }
   },
   computed: {
     imageUrl: function() {
@@ -107,7 +116,7 @@ export default {
       return this.$store.state.database;
     }
   }
-}
+};
 </script>
 <style scoped>
 .sectionHeader {

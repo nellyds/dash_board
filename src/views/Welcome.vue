@@ -3,32 +3,31 @@
     <div class="sectionHeader">
       <p>Hi, {{ user }}, what do you want to do today?</p>
     </div>
-      <div v-if="display">
-        <v-row>
-          <v-col md="2">
-            <img
-              class="hvr-bob"
-              src="@/assets/edit.png"
-              id="write"
-              v-on:click="toggle($event)"
-            />
-            <p id="create" v-on:click="goto($event)">
-              Create Content for your site
-            </p>
-            <img
-              class="hvr-bob"
-              src="@/assets/organize.png"
-              id="link"
-              v-on:click="toggle($event)"
-            />
-            <p id="display" v-on:click="goto($event)">Organize your content.</p>
-          </v-col>
-          <v-col md="6">
-            <div class="createContainer"></div>
-          </v-col>
-        </v-row>
-      </div>
-
+    <div v-if="display">
+      <v-row>
+        <v-col md="2">
+          <img
+            class="hvr-bob"
+            src="@/assets/edit.png"
+            id="write"
+            v-on:click="toggle($event)"
+          />
+          <p id="create" v-on:click="goto($event)">
+            Create Content for your site
+          </p>
+          <img
+            class="hvr-bob"
+            src="@/assets/organize.png"
+            id="link"
+            v-on:click="toggle($event)"
+          />
+          <p id="display" v-on:click="goto($event)">Organize your content.</p>
+        </v-col>
+        <v-col md="6">
+          <div class="createContainer"></div>
+        </v-col>
+      </v-row>
+    </div>
   </div>
 </template>
 <script>

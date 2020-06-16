@@ -20,7 +20,6 @@
   </div>
 </template>
 <script>
-
 import LinkUpload from "@/components/News/LinkUpload.vue";
 import SubmitNews from "@/components/News/SubmitNews.vue";
 export default {

@@ -15,9 +15,9 @@ Vue.config.productionTip = false;
 Vue.use(Editor);
 Vue.use(VuePageTransition);
 Vue.use(VuePaginate);
-import CKEditor from '@ckeditor/ckeditor5-vue';
+import CKEditor from "@ckeditor/ckeditor5-vue";
 
-Vue.use( CKEditor );
+Vue.use(CKEditor);
 Vue.prototype.$http = axios;
 
 Vue.use(Cloudinary, {
