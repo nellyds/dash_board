@@ -18,9 +18,9 @@
       <HoCImageSelect pictureSlot="2" />
       <HoCImageSelect pictureSlot="3" />
       <v-btn @click="preview = !preview">Preview</v-btn>
-      <v-overlay :value="preview" v-if="preview">
+      <transition name="slide">
               <hocTemplate
-              @click="preview = false"
+              v-if="preview"
         v-bind:intro="intro"
         v-bind:paragraph="paragraph"
         v-bind:secondHeadline="secondHeadline"
@@ -31,8 +31,8 @@
         v-bind:image2="image2"
         v-bind:image3="image3"
       />
+      </transition>
         <v-btn @click="preview = false" />
-      </v-overlay>
       <v-btn @click="submitItem" />
 
     </v-card>
