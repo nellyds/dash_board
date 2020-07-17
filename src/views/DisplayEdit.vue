@@ -12,12 +12,20 @@
       <v-btn text @click="getDisplayedRecords">Get Collection </v-btn>
       <div v-if="items.length > 0">
         <div v-for="(item, i) in items" v-bind:key="i">
-          <ItemDisplay
-            v-bind:database="database"
-            v-bind:collection="selectedCollection"
-            v-bind:_id="item._id"
-            v-bind:title="item.title"
-          />
+          <v-card outlined shaped>
+            <ItemDisplay
+              v-bind:database="database"
+              v-bind:collection="selectedCollection"
+              v-bind:_id="item._id"
+              v-bind:title="item.title"
+              v-bind:display="item.display"
+            />
+            <Testimonial
+              v-bind:name="item.name"
+              v-bind:testimonial="item.testimonial"
+              v-bind:display="item.display"
+            />
+          </v-card>
         </div>
       </div>
     </div>
@@ -25,10 +33,12 @@
 </template>
 <script>
 import ItemDisplay from "@/components/ItemDisplay.vue";
+import Testimonial from "@/components/Testimonial.vue";
 export default {
   name: "DisplayEdit",
   components: {
-    ItemDisplay
+    ItemDisplay,
+    Testimonial
   },
   data() {
     return {
@@ -53,14 +63,15 @@ export default {
         });
     },
     getDisplayedRecords: function() {
+      this.items = [];
       this.$http
         .post(this.apiUrl + "/getDisplay", {
           database: this.database,
           collection: this.selectedCollection
         })
         .then(result => {
-          this.items = result.data.result;
-          this.fields = result.data.fields;
+          console.log(result.data);
+          this.items = result.data;
         })
         .catch(() => {
           console.log("Internal Server Error retrieving documents");
@@ -69,7 +80,6 @@ export default {
     getItem: function() {}
   },
   beforeMount() {
-    this.database = "WellNessOne";
     this.submitDB();
   },
   computed: {

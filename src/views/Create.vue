@@ -3,19 +3,20 @@
     <div class="sectionHeader">
       <p>What do you want to create?</p>
     </div>
-    <v-tabs 
-        v-if="$vuetify.breakpoint.smAndUp"
-        vertical
-        background-color="white">
-      <v-tab >
+    <v-tabs
+      v-if="$vuetify.breakpoint.smAndUp"
+      vertical
+      background-color="white"
+    >
+      <v-tab>
         <p id="write" v-on:click="toggle($event)">Write an article</p>
       </v-tab>
       <v-tab>
         <p id="link" v-on:click="toggle($event)">Upload a Link to share</p>
       </v-tab>
-    <v-tab>
-      <p v-if="nelly">Write a new blog entry</p>
-    </v-tab>
+      <v-tab>
+        <p v-if="nelly">Write a new blog entry</p>
+      </v-tab>
       <v-tab-item>
         <SubmitNews />
       </v-tab-item>
@@ -26,18 +27,16 @@
         <BlogUpdate />
       </v-tab-item>
     </v-tabs>
-        <v-tabs 
-        v-else
-        background-color="white">
-      <v-tab >
+    <v-tabs v-else background-color="white">
+      <v-tab>
         <p id="write" v-on:click="toggle($event)">Write an article</p>
       </v-tab>
       <v-tab>
         <p id="link" v-on:click="toggle($event)">Upload a Link to share</p>
       </v-tab>
-    <v-tab>
-      <p v-if="nelly">Write a new blog entry</p>
-    </v-tab>
+      <v-tab>
+        <p v-if="nelly">Write a new blog entry</p>
+      </v-tab>
       <v-tab-item>
         <SubmitNews />
       </v-tab-item>
@@ -150,11 +149,10 @@ export default {
     database: function() {
       return this.$store.state.database;
     },
-    nelly: function(){
-      if (this.$store.state.user == 'Nellzymandias'){
+    nelly: function() {
+      if (this.$store.state.user == "Nellzymandias") {
         return true;
-      }
-      else return false;
+      } else return false;
     }
   }
 };

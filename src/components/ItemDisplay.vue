@@ -1,49 +1,39 @@
 <template>
   <v-content>
-    <div></div>
     <div class="displayCard">
-      <v-card
-        style="padding: 10px; border-top-right-radius: 25px; top-right-radius: 50px; border; background-color: rgb(255,73,112);"
+      <v-btn text @click="editDisplay">Change Display</v-btn>
+      <p>{{ display }}</p>
+      <v-btn @click="deleteItem" text>Delete this item</v-btn>
+      <v-alert
+        v-if="confirmWarning"
+        data-aos="fade-left"
+        border="right"
+        colored-border
+        type="warning"
+        elevation="2"
       >
-        <v-card-text style="color:white; font-size:2em;">{{
-          title
-        }}</v-card-text>
-      </v-card>
-      <v-card>
-        <!-- <p>{{collection}}</p> -->
-        <!-- <v-btn @click="edit = !edit" text>Edit this item</v-btn> -->
-        <v-btn @click="deleteItem" text>Delete this item</v-btn>
-        <v-alert
-          v-if="confirmWarning"
-          data-aos="fade-left"
-          border="right"
-          colored-border
-          type="warning"
-          elevation="2"
-        >
-          Are you sure you want to delete this item?
-          <v-btn text @click="confirmDelete">Confirm</v-btn>
-        </v-alert>
-        <v-alert
-          v-if="deleted"
-          data-aos="fade-left"
-          border="right"
-          colored-border
-          type="warning"
-          elevation="2"
-        >
-          Item Deleted
-        </v-alert>
-        <transition name="flip">
-          <div v-if="edit">
-            <ItemEdit
-              v-bind:database="database"
-              v-bind:collection="collection"
-              v-bind:_id="_id"
-            />
-          </div>
-        </transition>
-      </v-card>
+        Are you sure you want to delete this item?
+        <v-btn text @click="confirmDelete">Confirm</v-btn>
+      </v-alert>
+      <v-alert
+        v-if="deleted"
+        data-aos="fade-left"
+        border="right"
+        colored-border
+        type="warning"
+        elevation="2"
+      >
+        Item Deleted
+      </v-alert>
+      <transition name="flip">
+        <div v-if="edit">
+          <ItemEdit
+            v-bind:database="database"
+            v-bind:collection="collection"
+            v-bind:_id="_id"
+          />
+        </div>
+      </transition>
     </div>
   </v-content>
 </template>
@@ -56,10 +46,10 @@ export default {
   },
 
   props: {
-    title: String,
     _id: String,
     database: String,
-    collection: String
+    collection: String,
+    display: Boolean
   },
   data() {
     return {
@@ -91,6 +81,22 @@ export default {
           }
         })
         .catch(() => console.log("Data access error"));
+    },
+    editDisplay: function() {
+      this.$http
+        .post(
+          this.apiUrl + "/editDisplay",
+          {
+            database: this.database,
+            collection: this.collection,
+            _id: this._id,
+            display: !this.display
+          },
+          { headers: { Authorization: `Bearer ${this.$store.state.jwt}` } }
+        )
+        .then(result => {
+          window.alert(result);
+        });
     }
   },
   computed: {

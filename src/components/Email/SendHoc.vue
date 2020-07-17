@@ -1,25 +1,95 @@
 <template>
   <v-content>
-    {{ user }}
-    <SendHoc v-if="showHoc" />
-    <SendWellness1 v-if="showWellness1" />
+    <v-card flat>
+      House Of Clay
+      <img
+        class="hvr-bob"
+        src="@/assets/email.png"
+        id="write"
+        v-on:click="toggle($event)"
+      />
+      <v-text-field label="intro" v-model="intro" />
+      <v-text-field label="paragraph" v-model="paragraph" />
+      <v-text-field label="secondHeadline" v-model="secondHeadline" />
+      <v-text-field label="paragraph2" v-model="paragraph2" />
+      <v-text-field label="quote" v-model="quote" />
+      <v-text-field label="shareParagraph" v-model="shareParagraph" />
+      <HoCImageSelect pictureSlot="1" />
+      <HoCImageSelect pictureSlot="2" />
+      <HoCImageSelect pictureSlot="3" />
+      <v-btn @click="preview = !preview">Preview</v-btn>
+      <v-overlay :value="preview" v-if="preview">
+              <hocTemplate
+              @click="preview = false"
+        v-bind:intro="intro"
+        v-bind:paragraph="paragraph"
+        v-bind:secondHeadline="secondHeadline"
+        v-bind:paragraph2="paragraph2"
+        v-bind:quote="quote"
+        v-bind:shareParagraph="shareParagraph"
+        v-bind:image1="image1"
+        v-bind:image2="image2"
+        v-bind:image3="image3"
+      />
+        <v-btn @click="preview = false" />
+      </v-overlay>
+      <v-btn @click="submitItem" />
+
+    </v-card>
+    sdfdss
   </v-content>
 </template>
 <script>
-import SendHoc from "@/components/Email/SendHoc.vue";
-import SendWellness1 from "@/components/Email/SendWellness1.vue";
+import HoCImageSelect from "@/components/Util/HoCImageSelect.vue";
+import hocTemplate from "@/components/Email/hocTemplate.vue";
 export default {
   components: {
-    SendHoc,
-    SendWellness1
+    HoCImageSelect,
+    hocTemplate
   },
   data() {
     return {
-      showHoc: null,
-      showWellness1: null
+      intro: null,
+      paragraph: null,
+      secondHeadline: null,
+      paragraph2: null,
+      quote: null,
+      shareParagraph: null,
+      confirm: false,
+      preview: false
     };
   },
-
+  methods: {
+    submitItem: function() {
+      this.loading = true;
+      this.$http
+        .post(
+          this.apiUrl + "/newsLetter/hoc",
+          {
+            intro: this.intro,
+            paragraph: this.paragraph,
+            secondHeadline: this.secondHeadline,
+            paragraph2: this.paragraph2,
+            quote: this.quote,
+            shareParagraph: this.shareParagraph,
+            image1: this.image1,
+            image2: this.image2,
+            image3: this.image3
+          },
+          { headers: { Authorization: `Bearer ${this.$store.state.jwt}` } }
+        )
+        .then(result => {
+          this.loading = false;
+          this.message = result.data.message;
+          this.$store.commit({
+            type: "removeImageUrl"
+          });
+        })
+        .catch(() => {
+          console.log("Error connecting to server resource");
+        });
+    }
+  },
   computed: {
     imageUrl: function() {
       return this.$store.state.imageUrl;
@@ -30,16 +100,14 @@ export default {
     database: function() {
       return this.$store.state.database;
     },
-    user: function() {
-      return this.$store.state.user;
-    }
-  },
-  beforeMount() {
-    if (this.user === "HouseOfClay") {
-      this.showHoc = true;
-    }
-    if (this.user === "Wellness1") {
-      this.User === "showWellness1";
+    image1: function() {
+      return this.$store.state.hocImage1;
+    },
+    image2: function() {
+      return this.$store.state.hocImage2;
+    },
+    image3: function() {
+      return this.$store.state.hocImage3;
     }
   }
 };

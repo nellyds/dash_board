@@ -114,6 +114,9 @@ export default {
     },
     database: function() {
       return this.$store.state.database;
+    },
+    user: function() {
+      return this.$store.state.user;
     }
   }
 };

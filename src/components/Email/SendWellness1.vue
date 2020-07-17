@@ -1,25 +1,85 @@
 <template>
   <v-content>
-    {{ user }}
-    <SendHoc v-if="showHoc" />
-    <SendWellness1 v-if="showWellness1" />
+    <v-card flat>
+      Wellness 1
+      <img
+        class="hvr-bob"
+        src="@/assets/email.png"
+        id="write"
+        v-on:click="toggle($event)"
+      />
+      <v-card style="margin: 10px;">
+        <v-form action="#" @submit.prevent="submitItem">
+          <v-text-field v-model="heading" label="heading" />
+          <v-text-field v-model="subheading" label="subheading" />
+          <v-textarea v-model="article" label="article">type here</v-textarea>
+          <v-btn @click="image = !image" text
+            >Add a header image to the article</v-btn
+          >
+          <transition name="flip">
+            <ImageUpload v-if="image" />
+          </transition>
+          <v-btn type="submitItem">Submit news letter</v-btn>
+        </v-form>
+      </v-card>
+    </v-card>
+    <v-progress-linear
+      v-if="loading"
+      color="rgb(255,73,112)"
+      indeterminate
+      rounded
+      height="6"
+    ></v-progress-linear>
+    <v-alert color="rgb(255,73,112)" v-if="message != null">
+      <p style="color: white">{{ message }}</p>
+    </v-alert>
   </v-content>
 </template>
 <script>
-import SendHoc from "@/components/Email/SendHoc.vue";
-import SendWellness1 from "@/components/Email/SendWellness1.vue";
+import ImageUpload from "@/components/Util/ImageUpload";
 export default {
+  name: "SendWellness1",
   components: {
-    SendHoc,
-    SendWellness1
+    ImageUpload
   },
   data() {
     return {
-      showHoc: null,
-      showWellness1: null
+      heading: "",
+      subheading: "",
+      collection: "",
+      article: "",
+      image: false,
+      loading: false,
+      message: null
     };
   },
-
+  methods: {
+    submitItem: function() {
+      this.loading = true;
+      this.$http
+        .post(
+          this.apiUrl + "/sendMail",
+          {
+            database: this.database,
+            heading: this.heading,
+            subheading: this.subheading,
+            article: this.article,
+            imageUrl: this.imageUrl
+          },
+          { headers: { Authorization: `Bearer ${this.$store.state.jwt}` } }
+        )
+        .then(result => {
+          this.loading = false;
+          this.message = result.data.message;
+          this.$store.commit({
+            type: "removeImageUrl"
+          });
+        })
+        .catch(() => {
+          console.log("Error connecting to server resource");
+        });
+    }
+  },
   computed: {
     imageUrl: function() {
       return this.$store.state.imageUrl;
@@ -29,17 +89,6 @@ export default {
     },
     database: function() {
       return this.$store.state.database;
-    },
-    user: function() {
-      return this.$store.state.user;
-    }
-  },
-  beforeMount() {
-    if (this.user === "HouseOfClay") {
-      this.showHoc = true;
-    }
-    if (this.user === "Wellness1") {
-      this.User === "showWellness1";
     }
   }
 };
