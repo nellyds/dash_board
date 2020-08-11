@@ -32,7 +32,6 @@ export default new Vuex.Store({
       this.state.jwt = argument.jwt;
       this.state.user = argument.user;
       this.state.database = argument.user;
-      window.alert("db :" + this.state.database);
       if (argument.status === "logged in") {
         this.state.isAuthenticated = true;
         localStorage.setItem("isAuth", "Authenticated");

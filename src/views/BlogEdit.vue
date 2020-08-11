@@ -106,7 +106,6 @@ export default {
     },
     getArticles: function() {
       this.articles = [];
-      window.alert(this.$store.state.j);
       this.$http
         .post(
           "http://127.0.0.1:5000/getSection",
