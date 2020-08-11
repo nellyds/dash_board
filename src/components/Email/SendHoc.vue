@@ -17,35 +17,15 @@
       <HoCImageSelect pictureSlot="1" />
       <HoCImageSelect pictureSlot="2" />
       <HoCImageSelect pictureSlot="3" />
-      <v-btn @click="preview = !preview">Preview</v-btn>
-      <transition name="slide">
-              <hocTemplate
-              v-if="preview"
-        v-bind:intro="intro"
-        v-bind:paragraph="paragraph"
-        v-bind:secondHeadline="secondHeadline"
-        v-bind:paragraph2="paragraph2"
-        v-bind:quote="quote"
-        v-bind:shareParagraph="shareParagraph"
-        v-bind:image1="image1"
-        v-bind:image2="image2"
-        v-bind:image3="image3"
-      />
-      </transition>
-        <v-btn @click="preview = false" />
-      <v-btn @click="submitItem" />
-
+      <v-btn outlined @click="submitItem">Submit</v-btn>
     </v-card>
-    sdfdss
   </v-content>
 </template>
 <script>
 import HoCImageSelect from "@/components/Util/HoCImageSelect.vue";
-import hocTemplate from "@/components/Email/hocTemplate.vue";
 export default {
   components: {
     HoCImageSelect,
-    hocTemplate
   },
   data() {
     return {

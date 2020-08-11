@@ -1,36 +1,38 @@
 <template>
   <div class="hocTemplate">
     <v-row no-gutters>
-<div class= "paddingColumn" />
+      <div class="paddingColumn" />
       <div>
-          <div class="newsLetter">
-          <img class="headerImage" src="https://res.cloudinary.com/nelsondsilva/image/upload/v1594842507/houseBlank.png" />
+        <div class="newsLetter">
+          <img
+            class="headerImage"
+            src="https://res.cloudinary.com/nelsondsilva/image/upload/v1594842507/houseBlank.png"
+          />
           <div style="background-color: rgba(255,255,255,.9)">
-              <p class="letterGreeting" >Hello from House Of Clay</p>
-        <img class="newsImage" :src="image1" />
-                <p class="letterSectionTitle">{{intro}}</p>
-       <p class="letterContent"> {{paragraph}}</p>
-        
+            <p class="letterGreeting">Hello from House Of Clay</p>
+            <img class="newsImage" :src="image1" />
+            <p class="letterSectionTitle">{{ intro }}</p>
+            <p class="letterContent">{{ paragraph }}</p>
           </div>
           <div style="background-color: rgba(255,255,255,.8)">
-        <img class="newsImage" :src="image2" />
-  <p class="letterSectionTitle">
-        {{secondHeadline}}</p>
-    <p class="letterContent">      {{paragraph2}}</p>
+            <img class="newsImage" :src="image2" />
+            <p class="letterSectionTitle">
+              {{ secondHeadline }}
+            </p>
+            <p class="letterContent">{{ paragraph2 }}</p>
           </div>
           <div style="background-color: rgba(255,255,255,.7)">
-              <v-row>
-                  <v-col>
-                        <img :src="image3" />
-                  </v-col>
-                <v-col>
-                    <p class="quote">              {{quote}}</p>
-                  </v-col>
-              </v-row>
+            <v-row>
+              <v-col>
+                <img :src="image3" />
+              </v-col>
+              <v-col>
+                <p class="quote">{{ quote }}</p>
+              </v-col>
+            </v-row>
           </div>
-        {{shareParagraph}}
+          {{ shareParagraph }}
         </div>
-
       </div>
     </v-row>
   </div>
@@ -51,9 +53,9 @@ export default {
 };
 </script>
 <style scoped>
-.newsImage{
-    margin-left: 400px;
-    width: 200px;
+.newsImage {
+  margin-left: 400px;
+  width: 200px;
 }
 .hocTemplate {
   background-color: #ff4ffc;
@@ -64,29 +66,28 @@ export default {
   margin: 0;
   padding: 0;
 }
-.headerImage{
-    width: 600px;
-    margin-left: 200px;
+.headerImage {
+  width: 600px;
+  margin-left: 200px;
 }
 .paddingColumn {
-width: 200px;
+  width: 200px;
 }
-.newsLetter{
-    width:1000px;
-    margin: 0px;
-
+.newsLetter {
+  width: 1000px;
+  margin: 0px;
 }
-.letterContent{
-text-align: center;
+.letterContent {
+  text-align: center;
 }
-.letterSectionTitle{
-    font-weight: bold;
-    font-size: 1.5em;
-    text-align: center;
+.letterSectionTitle {
+  font-weight: bold;
+  font-size: 1.5em;
+  text-align: center;
 }
-.letterGreeting{
-    font-weight: bold;
-    font-size: 2.8em;
-    text-align: center;
+.letterGreeting {
+  font-weight: bold;
+  font-size: 2.8em;
+  text-align: center;
 }
 </style>

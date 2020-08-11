@@ -9,24 +9,35 @@
         label="Standard"
         v-model="selectedCollection"
       ></v-select>
-      <v-btn text @click="getDisplayedRecords">Get Collection </v-btn>
+      <v-btn text @click="getDisplayedRecords">Get Content</v-btn>
       <div v-if="items.length > 0">
-        <div v-for="(item, i) in items" v-bind:key="i">
-          <v-card outlined shaped>
-            <ItemDisplay
-              v-bind:database="database"
-              v-bind:collection="selectedCollection"
-              v-bind:_id="item._id"
-              v-bind:title="item.title"
-              v-bind:display="item.display"
-            />
-            <Testimonial
-              v-bind:name="item.name"
-              v-bind:testimonial="item.testimonial"
-              v-bind:display="item.display"
-            />
-          </v-card>
-        </div>
+        <paginate name="itemList" :list="items">
+          <div v-for="(item, i) in items" v-bind:key="i">
+            <v-card class="displayContent" outlined shaped raised>
+              <Testimonial
+                v-bind:name="item.name"
+                v-bind:testimonial="item.testimonial"
+                v-bind:display="item.display"
+              />
+              <ItemDisplay
+                v-bind:database="database"
+                v-bind:collection="selectedCollection"
+                v-bind:_id="item._id"
+                v-bind:title="item.title"
+                v-bind:display="item.display"
+                v-on:refreshList="getDisplayedRecords"
+              />
+            </v-card>
+          </div>
+        </paginate>
+        <paginate-links
+          class="list"
+          for="itemList"
+          :simple="{
+            next: 'Next »',
+            prev: '« Back'
+          }"
+        ></paginate-links>
       </div>
     </div>
   </div>
@@ -44,6 +55,7 @@ export default {
     return {
       collections: [],
       items: [],
+      paginate: ["itemList"],
       fields: [],
       selectedCollection: "",
       index: 0,
@@ -101,5 +113,9 @@ export default {
   padding: 20px;
   color: white;
   font-size: 2.2em;
+}
+.displayContent {
+  width: 450px;
+  margin: 10px;
 }
 </style>

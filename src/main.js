@@ -9,14 +9,14 @@ import AOS from "aos";
 import Cloudinary from "cloudinary-vue";
 import "v-markdown-editor/dist/v-markdown-editor.css";
 import Editor from "v-markdown-editor";
-import VuePaginate from "vue-paginate";
 import VuePageTransition from "vue-page-transition";
 Vue.config.productionTip = false;
 Vue.use(Editor);
 Vue.use(VuePageTransition);
 Vue.use(VuePaginate);
 import CKEditor from "@ckeditor/ckeditor5-vue";
-
+import VuePaginate from "vue-paginate";
+Vue.use(VuePaginate);
 Vue.use(CKEditor);
 Vue.prototype.$http = axios;
 

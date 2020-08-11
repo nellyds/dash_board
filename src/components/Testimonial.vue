@@ -1,7 +1,9 @@
 <template>
-  <div>
-    <p>Name: {{ name }}</p>
-    <p>Testimonial: {{ testimonial }}</p>
+  <div class="testimonial">
+    <p><span class="testimonialContent">Name: </span>{{ name }}</p>
+    <p>
+      <span class="testimonialContent">Testimonial: </span> {{ testimonial }}
+    </p>
   </div>
 </template>
 <script>
@@ -12,4 +14,12 @@ export default {
   }
 };
 </script>
-<style scoped></style>
+<style scoped>
+.testimonialContent {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+.testimonial {
+  padding: 20px;
+}
+</style>

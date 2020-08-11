@@ -1,8 +1,10 @@
 <template>
   <v-content>
     <div class="displayCard">
-      <v-btn text @click="editDisplay">Change Display</v-btn>
-      <p>{{ display }}</p>
+      <div>
+        <v-checkbox v-model="display" label="currently displaying" />
+        <v-btn text @click="editDisplay">Change Display</v-btn>
+      </div>
       <v-btn @click="deleteItem" text>Delete this item</v-btn>
       <v-alert
         v-if="confirmWarning"
@@ -94,8 +96,8 @@ export default {
           },
           { headers: { Authorization: `Bearer ${this.$store.state.jwt}` } }
         )
-        .then(result => {
-          window.alert(result);
+        .then(() => {
+          this.$emit("refreshList");
         });
     }
   },
